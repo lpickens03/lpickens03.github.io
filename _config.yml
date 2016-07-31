@@ -1,0 +1,33 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:         true
+gems: [jekyll-paginate]
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Laura Pickens
+tagline:          'Information Security Enthusiast'
+description:      'This site is currently under construction. Please check back soon for updates.'
+url:              http://www.laurapickens.net
+
+author:
+  name:           'Laura Pickens'
+  url:            https://twitter.com/pickl09
+
+paginate:         5
+
+# Set excerpt separator
+truncate_size:    70
+
+# Custom vars
+version:          2.0.0
+
+github:
+  repo:           https://github.com/poole/lanyon
+  
+# Social networking links used in footer. Update and remove as you like.
+  twitter:        https://twitter.com/pickl09
+  facebook:       
+  linkedin:       
