@@ -1,3 +1,4 @@
+---
 layout: page
 title: Archive
 ---
@@ -12,6 +13,7 @@ title: Archive
   {% endif %}
 <table cellpadding="0" cellspacing="0" border="0"> 
 
-  <tr><td><a href="{{ post.url }}">{{ post.title }}</a></td><td style = "text-align:right">{{post.date | date: "%-d %B"}}</td>
+  <tr><td><a href="{{ post.url }}">{{ post.title }}</a></td>
+  <td style = "text-align:right">{{post.date | date: "%-d %B"}}</td></tr>
 </table>
 {% endfor %}
