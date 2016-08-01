@@ -10,6 +10,7 @@ title:            Laura Pickens
 tagline:          'Information Security Enthusiast'
 description:      'This site is currently under construction. Please check back soon for updates.'
 url:              http://www.laurapickens.net
+baseurl:          /
 
 author:
   name:           'Laura Pickens'

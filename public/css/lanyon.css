@@ -38,6 +38,7 @@
 html,
 body {
   overflow-x: hidden;
+  background-color: #000;
 }
 
 html {
@@ -63,6 +64,8 @@ h1, h2, h3, h4, h5, h6 {
 .wrap {
   position: relative;
   width: 100%;
+  height: 100%;
+  background-color: #fff;
 }
 
 
@@ -74,6 +77,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .container {
   max-width: 28rem;
+  background-color: #fff;
 }
 @media (min-width: 38rem) {
   .container {
@@ -151,7 +155,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
   font-size: .875rem; /* 15px */
   color: rgba(255,255,255,.6);
-  background-color: #202020;
+  margin-top: 3.6rem;
+  /*background-color: #202020;*/
+  -webkit-transition: all .3s ease-in-out;
+          transition: all .3s ease-in-out;
 }
 @media (min-width: 30rem) {
   .sidebar {
@@ -262,7 +269,7 @@ a.sidebar-nav-item:focus {
  * Read more about it at http://meyerweb.com/eric/thoughts/2011/09/12/.
  */
 
-.wrap,
+/*.wrap,
 .sidebar,
 .sidebar-toggle {
     -webkit-backface-visibility: hidden;
@@ -294,8 +301,38 @@ a.sidebar-nav-item:focus {
 }
 #sidebar-checkbox:checked ~ .wrap {
   left: 14rem;
+}*/
+
+.wrap,
+.sidebar,
+.sidebar-toggle {
+  -webkit-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+.wrap,
+.sidebar-toggle {
+  -webkit-transition: -webkit-transform .3s ease-in-out;
+          transition: transform .3s ease-in-out;
 }
 
+#sidebar-checkbox:checked + .sidebar {
+  z-index: 10;
+  visibility: visible;
+}
+#sidebar-checkbox:checked ~ .sidebar,
+#sidebar-checkbox:checked ~ .wrap/*,
+#sidebar-checkbox:checked ~ .sidebar-toggle*/ {
+  -webkit-transform: translateX(14rem);
+      -ms-transform: translateX(14rem);
+          transform: translateX(14rem);
+}
+
+/*#sidebar-checkbox:checked ~ .sidebar-toggle{
+  -webkit-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+          backface-visibility: hidden;
+}*/
 
 /*
  * Posts and pages
@@ -306,7 +343,7 @@ a.sidebar-nav-item:focus {
 
 .page,
 .post {
-  margin-bottom: 4em;
+  /*margin-bottom: 4em;*/
 }
 
 /* Blog post or page title */
@@ -323,16 +360,18 @@ a.sidebar-nav-item:focus {
 /* Meta data line below post title */
 .post-date {
   display: block;
-  margin-top: -.5rem;
-  margin-bottom: 1rem;
+  /*margin-top: -.5rem;
+  margin-bottom: 1rem;*/
   color: #9a9a9a;
 }
 
 /* Related posts */
 .related {
-  padding-top: 2rem;
+  /*padding-top: 2rem;
   padding-bottom: 2rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #eee;*/
+  background-color: #fff;
+  width: 100%;
 }
 .related-posts {
   padding-left: 0;
@@ -412,7 +451,7 @@ a.pagination-item:hover {
  * Flip the orientation of the page by placing the `.sidebar` and sidebar toggle
  * on the right side.
  */
-
+/*
 .layout-reverse .wrap,
 .layout-reverse .sidebar-toggle {
   -webkit-transition-property: right;
@@ -439,6 +478,26 @@ a.pagination-item:hover {
   left: auto;
   right: 14rem;
 }
+*/
+
+
+.layout-reverse .sidebar {
+  left: auto;
+  right: -14rem;
+}
+.layout-reverse .sidebar-toggle {
+  left: auto;
+  right: 1rem;
+}
+
+.layout-reverse #sidebar-checkbox:checked ~ .sidebar,
+.layout-reverse #sidebar-checkbox:checked ~ .wrap,
+.layout-reverse #sidebar-checkbox:checked ~ .sidebar-toggle {
+  -webkit-transform: translateX(-14rem);
+      -ms-transform: translateX(-14rem);
+          transform: translateX(-14rem);
+}
+
 
 
 /*
@@ -542,4 +601,28 @@ a.pagination-item:hover {
 .theme-base-0f .sidebar-toggle,
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
+}
+
+/*
+ * Overlay sidebar
+ *
+ * Make the sidebar content overlay the viewport content instead of pushing it
+ * aside when toggled.
+ */
+
+.sidebar-overlay #sidebar-checkbox:checked ~ .wrap {
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: translateX(0);
+}
+.sidebar-overlay #sidebar-checkbox:checked ~ .sidebar-toggle {
+  box-shadow: 0 0 0 .25rem #fff;
+}
+.sidebar-overlay #sidebar-checkbox:checked ~ .sidebar {
+  box-shadow: .25rem 0 .5rem rgba(0,0,0,.1);
+}
+
+/* Only one tweak for a reverse layout */
+.layout-reverse.sidebar-overlay #sidebar-checkbox:checked ~ .sidebar {
+  box-shadow: -.25rem 0 .5rem rgba(0,0,0,.1);
 }
