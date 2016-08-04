@@ -14,15 +14,15 @@ title: Home
 
     <span class="post-date">{{ post.date | date_to_string }}</span>
 
-    <p>{{ post.content | truncatewords: site.truncate_size | close_format}}
-    <a class="link-to-post"
-       href="{{ post.url }}">Read More</a>
+    <p>{{ post.content | strip_html | truncatewords: site.truncate_size }}</br>
+    <a class="btn-readmore"
+       href="{{ post.url }}">READ MORE</a>
     </p>
   </div>
   {% endfor %}
 </div>
 
-<div class="pagination">
+<div class="pagination text-center">
   {% if paginator.next_page %}
     <a class="pagination-item older" href="/page{{paginator.next_page}}">Older</a>
   {% else %}

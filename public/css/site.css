@@ -16,8 +16,8 @@
 .signature {
 	margin-top: 60px;
 	padding: 30px 0 15px 0;
-	border-bottom: 1px solid #f0f0f0; 
-	border-top: 1px solid #f0f0f0;
+	border-bottom: 1px solid #cccccc; 
+	border-top: 1px solid #cccccc;
 }
 
 .signature .image {
@@ -45,6 +45,31 @@
 .signature .info .title a {
 	color: #000; 
 	font-size: 22px;
+}
+
+.btn-readmore {
+	display: inline-block;
+    border: 2px solid #cccccc;
+    border-radius: 0.5em;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 25px;
+    margin: 18px 1px;
+    color: #666;
+    transition: all .3s;
+    /*transition not supported on all browsers*/
+}
+
+.btn-readmore:hover,
+.btn-readmore:focus,
+.btn-readmore:active,
+.btn-readmore.active {
+    border: solid 2px #666;
+    color: #18bc9c;
+    background: #666;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .btn-social {
@@ -80,4 +105,13 @@
     border: solid 2px #666;
     color: #18bc9c;
     background: #666;
+}
+
+.post h1, .post-date {
+	margin: 0;
+	padding: 0;
+}
+
+.post-date {
+	margin-bottom: 10px;
 }
