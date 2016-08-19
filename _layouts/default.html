@@ -7,23 +7,10 @@
 
     {% include navbar.html %}
 
-    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
-         content to avoid any CSS collisions with our real content. -->
-    <!--<div class="wrap">
-      <div class="masthead">
-        <div class="container">
-          <h3 class="masthead-title">
-            <a href="/" title="Home">{{ site.title }}</a>
-            <small>{{ site.tagline }}</small>
-          </h3>
-        </div>
-      </div>-->
-
       <div class="content">
         {{ content }}
       </div>
 
-      
     {% include footer.html %}
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
@@ -32,29 +19,6 @@
             <i class="fa fa-chevron-up"></i>
         </a>
     </div>
-
-    <!--</div> -->
-
-
-    <!--<label for="sidebar-checkbox" class="sidebar-toggle"></label>
-
-    <script>
-      (function(document) {
-        var toggle = document.querySelector('.sidebar-toggle');
-        var sidebar = document.querySelector('#sidebar');
-        var checkbox = document.querySelector('#sidebar-checkbox');
-
-        document.addEventListener('click', function(e) {
-          var target = e.target;
-
-          if(!checkbox.checked ||
-             sidebar.contains(target) ||
-             (target === checkbox || target === toggle)) return;
-
-          checkbox.checked = false;
-        }, false);
-      })(document);
-    </script>-->
 
     <!-- jQuery -->
     <script src="/js/jquery.js"></script>

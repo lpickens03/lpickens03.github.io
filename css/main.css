@@ -5,6 +5,15 @@
 
 header {
 	margin-bottom: 50px;
+  background-color: white;
+  background-image: url("/images/background.png");
+  background-repeat:no-repeat;
+  background-position: center center;
+  color: black;
+}
+
+header hr {
+  color: black;
 }
 
 .signature {
@@ -39,6 +48,11 @@ header {
 .signature .info .title a {
 	color: #000; 
 	font-size: 22px;
+}
+
+.signature .title a:hover{
+  color: #18bc9c;
+  text-decoration: none;
 }
 
 .btn-readmore {
@@ -101,6 +115,26 @@ header {
     background: #666;
 }
 
+.btn-primary {
+  margin: 0px;
+  padding: 9px;
+  border: solid 2px black;
+  font-size: 16px;
+  color: white;
+  background: black;
+  transition: all .3s ease-in-out;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-outline:active,
+.btn-outline.active {
+  border: solid 2px #666;
+  color: #18bc9c;
+  background: #666;
+}
+
 /*
  * Posts and pages
  *
@@ -125,6 +159,12 @@ header {
   text-decoration: none;
   padding-bottom: 5px;
 }
+
+.post-title a:hover{
+  color: #18bc9c;
+  text-decoration: none;
+}
+
 .page-title,
 .post-title {
   margin-top: 0;

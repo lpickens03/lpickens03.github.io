@@ -88,8 +88,7 @@ hr {
 
 header {
     text-align: center;
-    color: #fff;
-    background: #000000;
+    color: #000000;
 }
 
 header .container {
@@ -157,6 +156,7 @@ header .intro-text .skills {
 .navbar {
     text-transform: uppercase;
     font-weight: 700;
+    background-color: black;
 }
 
 .navbar a:focus {
@@ -388,6 +388,7 @@ footer .footer-below {
     bottom: 1%;
     width: 50px;
     height: 50px;
+    margin: 5px;
 }
 
 .scroll-top .btn {
