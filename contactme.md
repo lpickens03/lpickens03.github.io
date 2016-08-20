@@ -14,7 +14,7 @@ title: Contact Me
     <div class="row control-group">
         <div class="form-group col-xs-12 floating-label-form-group controls">
             <label>Email Address</label>
-            <input type="email" class="form-control" placeholder="Email Address" name="email" required data-validation-required-message="Please enter your email address.">
+            <input type="email" class="form-control" placeholder="Email Address" name="_replyto" required data-validation-required-message="Please enter your email address.">
             <p class="help-block text-danger"></p>
         </div>
     </div>
@@ -25,6 +25,9 @@ title: Contact Me
             <p class="help-block text-danger"></p>
         </div>
     </div>
+    <input type="hidden" name="_gotcha">
+    <input type="hidden" name="_next" value="/thankyou" />
+    <input type="hidden" name="_subject" value="Website Contact Form" />
     <br>
     <div id="success"></div>
     <div class="row">
