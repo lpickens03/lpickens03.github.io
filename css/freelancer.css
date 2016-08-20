@@ -110,7 +110,7 @@ header .intro-text .name {
 
 header .intro-text .skills {
     font-size: 1.25em;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 @media(min-width:768px) {
@@ -324,7 +324,7 @@ section.success a.active {
     position: relative;
     top: 2em;
     margin: 0;
-    font-size: .85em;
+    font-size: 1em;
     line-height: 1.764705882em;
     vertical-align: middle;
     vertical-align: baseline;

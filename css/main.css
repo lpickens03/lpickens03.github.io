@@ -76,6 +76,32 @@ header {
     font-weight: bold;
 }
 
+.btn-contactme {
+    display: inline-block;
+    border: 2px solid #cccccc;
+    border-radius: 0.5em;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 25px;
+    margin: 18px 1px;
+    color: #666;
+    background-color: white;
+    transition: all .3s;
+    /*transition not supported on all browsers*/
+}
+
+.btn-contactme:hover,
+.btn-contactme:focus,
+.btn-contactme:active,
+.btn-contactme.active {
+    border: solid 2px #666;
+    color: #18bc9c;
+    background: #666;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 .btn-social {
     display: inline-block;
     width: 35px;
@@ -268,3 +294,23 @@ a.pagination-item:hover {
   }
 }
 
+.aboutme,
+.aboutme h3
+{
+  color: white;
+}
+
+.aboutme .btn-social
+{
+  color: white;
+  border-color: white;
+}
+
+.aboutme .btn-outline:hover,
+.aboutme .btn-outline:focus,
+.aboutme .btn-outline:active,
+.aboutme .btn-outline.active {
+    border: solid 2px white;
+    color: #18bc9c;
+    background: white;
+}

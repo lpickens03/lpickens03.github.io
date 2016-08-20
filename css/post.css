@@ -194,3 +194,25 @@ tbody tr:nth-child(odd) th {
   margin-bottom: 15px;
   padding: 0;
 }
+
+/*
+ * Sections
+ */
+ .leftalign{
+  background-color: #264b73;
+  float: left;
+  padding: 5px;
+  border: 1px solid #264b73; 
+  border-radius: 0.5em;
+  margin-bottom: 18px;
+  margin-right: 18px;
+ }
+
+ .rightalign img{
+  margin: 0;
+  padding: 5px;
+  float: none;
+  text-align: center;
+  display: inline-block;
+  border-radius: 0.7em;
+ }
