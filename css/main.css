@@ -12,10 +12,6 @@ header {
   color: black;
 }
 
-header hr {
-  color: black;
-}
-
 .signature {
 	margin-top: 60px;
 	padding: 30px 0 15px 0;
@@ -271,3 +267,4 @@ a.pagination-item:hover {
     /*margin-left: -1px;*/
   }
 }
+
