@@ -1,0 +1,27 @@
+---
+layout: default
+---
+<div class="container">
+  <div class="page">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-date"> 
+    <i class="fa fa-calendar" aria-hidden="true"></i> 
+    {{ page.date | date_to_string }}
+    </div>
+    <div class="bookleftalign text-center">
+      <img class="bookcover" src="{{page.cover}}" alt="{{page.title}}" />
+      <div class="aboutbook">
+        {% include stars.html %}
+        <h3>Author</h3>
+        <p>{{ page.author }}</p>
+        <h3>Published</h3>
+        <p>{{ page.published }}</p>
+        <h3>Publisher</h3>
+        <p>{{ page.publisher }}</p>
+      </div>
+    </div>
+    {{ content }}
+    {% include signature.html %}
+
+  </div>
+</div>

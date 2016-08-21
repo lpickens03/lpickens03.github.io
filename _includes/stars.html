@@ -1,0 +1,22 @@
+<div class="stars">
+	{% capture rating %} {{ page.score }} {% endcapture %}
+	{% if book %}
+		{% capture rating %} {{ book.score }} {% endcapture %}
+	{% endif %}
+	{% assign half = 0 %}
+	{% if rating contains ".5" %}
+		{% assign half = 1%}
+		{% capture rating %} {{ rating | minus: 0.5 }} {% endcapture %}
+	{% endif %}
+	{% capture remainder %} {{ 5 | minus: rating }} {% endcapture %}
+	{% capture remainder %} {{ remainder | minus: half }} {% endcapture %}
+	{% for i in (1..rating) %}
+  	  <i class="fa fa-star" aria-hidden="true"></i>
+  	{% endfor %}
+  	{% for i in (1..half) %}
+  	  <i class="fa fa-star-half-o" aria-hidden="true"></i>
+  	{% endfor %}
+  	{% for i in (1..remainder) %}
+  	  <i class="fa fa-star-o" aria-hidden="true"></i>
+  	{% endfor %}
+</div>

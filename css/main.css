@@ -17,6 +17,7 @@ header {
 	padding: 30px 0 15px 0;
 	border-bottom: 1px solid #cccccc; 
 	border-top: 1px solid #cccccc;
+  overflow: hidden;
 }
 
 .signature .image {
@@ -196,6 +197,15 @@ header {
   margin-top: 100px;
 }
 
+.book-title {
+  color: #303030;
+  text-decoration: none;
+}
+
+.book-author {
+
+}
+
 /* Meta data line below post title */
 .post-date {
   display: block;
@@ -294,6 +304,20 @@ a.pagination-item:hover {
   }
 }
 
+.bookcover {
+  width: 130px;
+  height: 170px;
+  margin:0;
+  padding:0;
+  text-align: center;
+}
+
+.aboutbook,
+.aboutbook h3
+{
+  color: white;
+}
+
 .aboutme,
 .aboutme h3
 {
@@ -314,3 +338,71 @@ a.pagination-item:hover {
     color: #18bc9c;
     background: white;
 }
+
+.bookshelf {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.bookshelf li{
+  float: left;
+  margin: 5px;
+}
+
+.btn-book {
+    display: inline-block;
+    border: 2px solid #264b73;
+    border-radius: 0;
+    background-color: #264b73;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0;
+    color: white;
+    transition: all .3s;
+    /*transition not supported on all browsers*/
+}
+
+.btn-book:hover,
+.btn-book:focus,
+.btn-book:active,
+.btn-book.active {
+    border: solid 2px #666;
+    color: #18bc9c;
+    background: #666;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-book img {
+  width: 130px;
+  height: 170px;
+  border-radius:0;
+  margin:0;
+  padding:0;
+}
+
+/*
+ * Sections
+ */
+ .bookleftalign{
+  background-color: #264b73;
+  float: left;
+  padding: 5px;
+  border: 1px solid #264b73; 
+  border-radius: 0.5em;
+  margin-bottom: 18px;
+  margin-right: 18px;
+  width: 150px;
+ }
+
+ .bookleftalign img{
+  margin: 0;
+  padding: 5px;
+  float: none;
+  text-align: center;
+  display: inline-block;
+  border-radius: 0.7em;
+ }
