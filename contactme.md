@@ -3,7 +3,7 @@ layout: page
 title: Contact Me
 ---
 
-<form name="contactme" action="https://formspree.io/contact@laurapickens.net" method="POST">
+<form id="contactform" name="contactme" method="POST">
 	<div class="row control-group">
         <div class="form-group col-xs-12 floating-label-form-group controls">
             <label>Name</label>
@@ -25,7 +25,7 @@ title: Contact Me
             <p class="help-block text-danger"></p>
         </div>
     </div>
-    <input type="hidden" name="_gotcha">
+    <input type="text" name="_gotcha" style="display:none" >
     <input type="hidden" name="_next" value="/thankyou" />
     <input type="hidden" name="_subject" value="Website Contact Form" />
     <br>
@@ -34,3 +34,8 @@ title: Contact Me
     	<input class="btn-contactme" type="submit" value="Send">
     </div>
 </form>
+
+<script>
+    var contactform =  document.getElementById('contactform');
+    contactform.setAttribute('action', '//formspree.io/' + 'contact' + '@' + 'laurapickens' + '.' + 'net');
+</script>

@@ -13,7 +13,7 @@ title: About
         <!--</div>
     	<div class="footer-col col-md-4">-->
             <h3>Education</h3>
-            <p>MS Cybersecurity<br/>John's Hopkins<br/><small>(In Progress)</small></p>
+            <p>MS Cybersecurity<br/>Johns Hopkins<br/><small>(In Progress)</small></p>
             <p>BA Computer Science<br/>Ohio Wesleyan</p>
         <!--</div>
         <div class="footer-col col-md-4">-->
