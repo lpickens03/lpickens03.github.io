@@ -1,6 +1,8 @@
 ---
 layout: page
 title: Archive
+quote: "Pay attention to your enemies, for they are the first to discover your mistakes."
+quote-author: Antisthenes
 ---
 
 {% for post in site.posts %}

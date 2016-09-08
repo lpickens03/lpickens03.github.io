@@ -89,6 +89,8 @@ hr {
 header {
     text-align: center;
     color: #000000;
+    margin: 0;
+    padding: 0;
 }
 
 header .container {
@@ -111,6 +113,38 @@ header .intro-text .name {
 header .intro-text .skills {
     font-size: 1.25em;
     font-weight: 500;
+}
+
+header .pageheader {
+    text-align: left;
+    padding: 200px 50px 2rem 70px;
+}
+
+@media screen and (max-width: 768px) {
+    header .pageheader {
+        padding: 200px 50px 2rem 30px;
+    }
+}
+
+
+
+header .page-text {
+    text-align: left;
+    height: 100%;
+    vertical-align: text-bottom;
+}
+
+header .page-text .name {
+    display: block;
+    text-transform: uppercase;
+    font-size: 3em;
+    font-weight: 800;
+}
+
+header .page-text .quote {
+    display: block;
+    font-size: 1.25em;
+    font-weight: 550;
 }
 
 @media(min-width:768px) {

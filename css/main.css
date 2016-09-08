@@ -1,12 +1,19 @@
 
 .content .container .page {
-	padding-top:100px;
+	padding-top: 30px;
 }
 
 header {
-	margin-bottom: 50px;
   background-color: white;
   background-image: url("/images/background.jpg");
+  background-repeat:no-repeat;
+  background-position: center center;
+  color: black;
+}
+
+.aboutmebanner {
+  background-color: white;
+  background-image: url("/images/aboutmebanner.jpg");
   background-repeat:no-repeat;
   background-position: center center;
   color: black;
@@ -165,12 +172,20 @@ header {
  * page is wrapped in `.page` and is only used on the page layout.
  */
 
-.page,
+.page {
+  /*margin-bottom: 4em;*/
+  /*margin: 0;*/
+  background-color: #fff;
+  padding: 2rem;
+  margin-top: 60px;
+}
+
 .post {
   /*margin-bottom: 4em;*/
   /*margin: 0;*/
   background-color: #fff;
   padding: 2rem;
+  padding-top: 1rem;
 }
 
 /* Blog post or page title */
@@ -193,8 +208,12 @@ header {
   margin-top: 0;
 }
 
-.error-title{
+.error-title, .post-title{
   margin-top: 100px;
+}
+
+.post-title{
+  margin-top: 50px;
 }
 
 .book-title {

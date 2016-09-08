@@ -1,6 +1,8 @@
 ---
 layout: page
 title: Bookshelf
+quote: "Your schooling may be over, but remember your education still continues."
+quote-author: Unknown
 ---
 <ul class="bookshelf">
 {% for book in site.books %}
