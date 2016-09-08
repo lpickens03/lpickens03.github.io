@@ -29,15 +29,15 @@ quote-author: Google Chromium Projects
             	<li>
                     <a href="https://twitter.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
                 </li>
-                <li>
+                <!--<li>
                     <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
                 </li>
-                <!--<li>
+                <li>
                     <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
-                </li>-->
+                </li>
                 <li>
                     <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                </li>
+                </li>-->
                 <li>
                   <a href="/contactme" class="btn-social btn-outline"><i class="fa fa-fw fa-envelope"></i></a>
               </li>
