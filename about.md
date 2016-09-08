@@ -21,7 +21,7 @@ quote-author: Google Chromium Projects
         <!--</div>
         <div class="footer-col col-md-4">-->
             <h3>Location</h3>
-            <p>Orlando, FL</p>
+            <p>Florida, USA</p>
         <!--</div>
         <div class="footer-col col-md-4">-->
             <h3>Around the Web</h3>
