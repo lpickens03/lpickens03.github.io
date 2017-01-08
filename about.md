@@ -29,6 +29,9 @@ quote-author: Google Chromium Projects
             	<li>
                     <a href="https://twitter.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
                 </li>
+                <li>
+                    <a href="https://github.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
+                </li>
                 <!--<li>
                     <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
                 </li>

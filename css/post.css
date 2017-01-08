@@ -101,6 +101,8 @@ pre code {
   background-color: transparent;
 }
 .highlight {
+  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-size: 85%;
   margin-bottom: 1rem;
   border-radius: 4px;
 }

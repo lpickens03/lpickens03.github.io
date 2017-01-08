@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Fun with Cisco Switches
+title: Configuring Cisco Switches
 ---
 
 This weekend as part of my ongoing endeavor to get my home lab up and running, I tackled my first proper Cisco switch. Two Cisco Catalyst 3550 switches had been donated to my cause a few months back and I finally had the time to configure them today.
@@ -107,7 +107,7 @@ in "enable mode", you will see the passwords crystal clear listed in the configu
 
 <code>service password encryption</code>
 
-Now if you check the running config, a hash of the password is shown to mask it from prying eyes. Unfortunately, the encryption that these switches use is not strong and with minimal effort the passwords can be derived from the hash. So this only offers minimal security.
+Now if you check the running config, a hash of the password is shown to mask it from prying eyes. Unfortunately, the hashing functions that these switches use are not strong and with minimal effort the passwords can be derived from the hash. I take a deeper look into the Catalyst's weak hashing functions in <a href="/2017/01/08/cisco_type_7/">this post</a>.
 
 <br/>
 <h2>Miscellaneous Settings</h2>
