@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Fun with Cisco Switchs
+title: Fun with Cisco Switches
 ---
 
 This weekend as part of my ongoing endeavor to get my home lab up and running, I tackled my first proper Cisco switch. Two Cisco Catalyst 3550 switches had been donated to my cause a few months back and I finally had the time to configure them today.
