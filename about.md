@@ -50,7 +50,7 @@ quote-author: Google Chromium Projects
    </div>
 </div>
 <h2>Mission Statement</h2>
-I am a constant work-in-progress. This blog is intended as a way for me to document my research, projects and experiences for the "greater good" or, as is more likely the case, my own personal reference. While my primary focus will be on information security related topics, I reserve the right to stray off course whenever the mood hits. You have been warned. 
+I am a constant work-in-progress. This blog is a way for me to document my research, projects and experiences for the "greater good" or, as is more likely the case, my own personal reference. While my primary focus will be on information security related topics, I reserve the right to stray off course whenever the mood hits. You have been warned. 
 
 <br/>
 <h2>About Me</h2>
