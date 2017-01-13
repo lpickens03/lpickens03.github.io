@@ -9,6 +9,7 @@ header {
   background-repeat:no-repeat;
   background-position: center center;
   color: black;
+  margin-bottom: 50px;
 }
 
 .aboutmebanner {
@@ -208,12 +209,8 @@ header {
   margin-top: 0;
 }
 
-.error-title, .post-title{
+.error-title{
   margin-top: 100px;
-}
-
-.post-title{
-  margin-top: 50px;
 }
 
 .book-title {
