@@ -12,11 +12,11 @@ quote-author: Google Chromium Projects
     <div class="row">
     	<!--<div class="footer-col col-md-4">-->
             <h3>Job Title</h3>
-            <p>Software Engineer</p>
+            <p>Cybersecurity Analyst</p>
         <!--</div>
     	<div class="footer-col col-md-4">-->
             <h3>Education</h3>
-            <p>MS Cybersecurity<br/>Johns Hopkins<br/><small>(In Progress)</small></p>
+            <p>MS Cybersecurity <small style="font-size:8pt">(In Progress)</small><br/>Johns Hopkins</p>
             <p>BA Computer Science<br/>Ohio Wesleyan</p>
         <!--</div>
         <div class="footer-col col-md-4">-->
@@ -50,10 +50,15 @@ quote-author: Google Chromium Projects
    </div>
 </div>
 <h2>Mission Statement</h2>
-The world of information security is vast and constantly evolving. That's what makes this field so exciting! You can never rest on your laurels and claim the coveted title of "expert". There's always someone just around the corner with some crazy new attack (think <a href="http://www.slate.com/articles/technology/bitwise/2015/07/rowhammer_security_exploit_why_a_new_security_attack_is_truly_terrifying.html">Rowhammer</a>) that will leave you in the dust if you aren't paying attention. The struggle is real. And I love every moment of it! This blog documents my pursuit of this slippery title, from projects to research and any bits of wisdom I uncover along the way. 
-<br/><br/>
-<h2>About Laura</h2>
-Laura spent the first 6 years of her professional life building a specific skillset for her character. At which point she discovered an exciting new job class that perfectly aligned with her character's stats and decided to throw out her progress and start over, wiser with experience. This is her story.
+I am a constant work-in-progress. This blog is intended as a way for me to document my research, projects and experiences for the "greater good" or, as is more likely the case, my own personal reference. While my primary focus will be on information security related topics, I reserve the right to stray off course whenever the mood hits. You have been warned. 
+
+<br/>
+<h2>About Me</h2>
+My background is in developing tools, applications and scripts to help make other people's jobs easier. Through this work, I was exposed to a fast-paced environment that required me to learn about a variety of operating systems, networking setups, software and programming languages on the fly to automate time-consuming tasks. This was fun, but eventually I hit a plateau where I was no longer learning new things. I then discovered cybersecurity, a world that requires constant learning and evolving, and my future was set.
+
+I currently work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth vulnerability testing of customer systems.
+
+In my free time, when not working on my Master's, certifications or home lab projects, I enjoy exploring the world of astronomy and photography, as well as devouring whatever good food or wine I come by.
 <br/> 
 
 
