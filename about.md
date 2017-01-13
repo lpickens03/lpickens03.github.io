@@ -54,11 +54,11 @@ I am a constant work-in-progress. This blog is intended as a way for me to docum
 
 <br/>
 <h2>About Me</h2>
-My background is in developing tools, applications and scripts to help make other people's jobs easier. Through this work, I was exposed to a fast-paced environment that required me to learn about a variety of operating systems, networking setups, software and programming languages on the fly to automate time-consuming tasks. This was fun, but eventually I hit a plateau where I was no longer learning new things. I then discovered cybersecurity, a world that requires constant learning and evolving, and my future was set.
+My background is in developing tools, applications and scripts to help make other people's jobs easier. Through this work, I was exposed to a fast-paced environment that required me to learn about a variety of operating systems, networking setups, software and programming languages on the fly to automate time-consuming tasks. This was fun, but eventually I hit a plateau where I was no longer learning new things. I then discovered cybersecurity, a world that requires constant learning and evolving: My future was set.
 
 I currently work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth vulnerability testing of customer systems.
 
-In my free time, when not working on my Master's, certifications or home lab projects, I enjoy exploring the world of astronomy and photography, as well as devouring whatever good food or wine I come by.
+In my free time, when not working on my Master's, certifications or home lab projects, I enjoy exploring the world of astronomy and photography, as well as comsuming whatever good food and wine I come by.
 <br/> 
 
 
