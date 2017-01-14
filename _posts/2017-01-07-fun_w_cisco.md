@@ -5,7 +5,7 @@ title: Configuring Cisco Switches
 
 This weekend as part of my ongoing endeavor to get my home lab up and running, I tackled my first proper Cisco switch. Two Cisco Catalyst 3550 switches had been donated to my cause a few months back and I finally had the time to configure them today.
 
-<img src="/images/posts/2017-01-07/cat3550s.bmp" alt="Cisco Catalyst 3550s" width="500px"/>
+<img src="/images/posts/2017-01-07/cat3550s.bmp" alt="Cisco Catalyst 3550s"/>
 
 I was starting from square one with familiarizing myself with the 3550s' CLI. The switches had previously been used in a retail store of some sort so there was the added fun of restoring each switch to factory settings. At the end of the day, my goal was to break up the 48 FastEthernet ports into several vlans in prep for being connected up to my home lab network.
 
@@ -13,7 +13,7 @@ I was starting from square one with familiarizing myself with the 3550s' CLI. Th
 <h2>Connecting to the Switch</h2>
 One of the first things I realized I needed was a console cable. I had no idea what IP address the switch was currently set to, so attaching an ethernet cable and attempting to telnet in would do me no good. Since my MacBook supports limited ports, I used this <a href="https://www.amazon.com/gp/product/B00I8CT8YG/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1">USB to DB9 Cisco Console Cable</a> shown below.
 
-<img src="/images/posts/2017-01-07/control_cable.bmp" alt="USB to DB9 Cisco Console Cable" width="500px"/>
+<img src="/images/posts/2017-01-07/control_cable.bmp" alt="USB to DB9 Cisco Console Cable"/>
 
 Once my Mac and the switch were connected, I just had to find the associated usb device under /dev and run the following command:
 
