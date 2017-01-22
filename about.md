@@ -58,7 +58,7 @@ My background is in developing tools, applications and scripts to help make othe
 
 I currently work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth vulnerability testing of customer systems.
 
-In my free time, when not working on my Master's, certifications or home lab projects, I enjoy exploring the world of astronomy and photography, as well as comsuming whatever good food and wine I come by.
+In my free time, when not working on my Master's, certifications or home lab projects, I enjoy exploring the world of astronomy and photography, as well as consuming whatever good food and wine I come by.
 <br/> 
 
 
