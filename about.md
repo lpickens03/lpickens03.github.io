@@ -50,15 +50,15 @@ quote-author: Google Chromium Projects
    </div>
 </div>
 <h2>Mission Statement</h2>
-I am a constant work-in-progress. This blog is a way for me to document my research, projects and experiences for the "greater good" or, as is more likely the case, my own personal reference. While my primary focus will be on information security related topics, I reserve the right to stray off course whenever the mood hits. You have been warned. 
+I am a constant work-in-progress. This blog is a way for me to document my research, projects and experiences for my own personal reference. While my primary focus will be on information security related topics, I reserve the right to stray off course whenever the mood hits. You have been warned. 
 
 <br/>
 <h2>About Me</h2>
-My background is in developing tools, applications and scripts to help make other people's jobs easier. Through this work, I was exposed to a fast-paced environment that required me to learn about a variety of operating systems, networking setups, software and programming languages on the fly to automate time-consuming tasks. This was fun, but I eventually hit a plateau in the skills I was building. I then discovered cybersecurity, a world that requires constant learning and evolving: My future was set.
+My background is in developing tools, applications and scripts to help make  people's jobs easier. I've spent a lot of time working in a fast-paced environment that required me to learn about a variety of operating systems, networking configurations, software and programming languages on the fly to monitor and debug systems, integrate tools and automate time-consuming tasks. I moonlighted as a system administrator for a while before spending a few years in C++/C# application development. Until, of course, I realized cybersecurity was where my passions truly lie and steered my career in a new direction.
 
 I currently work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth vulnerability testing of customer systems.
 
-In my free time, when not working on my Master's, certifications or home lab projects, I enjoy exploring the world of astronomy and photography, as well as consuming whatever good food and wine I come by.
+In my free time, when not working on my Master's, certifications or home lab projects, I enjoy reading, exploring the world of astronomy and savoring whatever good food and wine come my way.
 <br/> 
 
 
