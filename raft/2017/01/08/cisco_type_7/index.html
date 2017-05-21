@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html xmlns="//www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 
   <head>
 
@@ -25,10 +25,10 @@
 
     <!-- Custom Fonts -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Cormorant:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One:400,700" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Cormorant:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Marcellus+SC:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Julius+Sans+One:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -137,17 +137,17 @@
 
 <p>Instead, both types refer to different hashing functions. Hashing is not the same as encryption. A hash function is intended to only be able to go one way, making it impossible to derive the original string from the hash. This is perfect for passwords as only the user needs to know what the original string is. When the user enters the password string, the system just runs it through the hash function and then compares the resulting hash to the stored hash. Encryption, on the other hand, is intended to be reversable: with a special key you can decrypt the ciphertext back into the original plaintext.</p>
 
-<p>A good hashing function generates a fixed-length string for any amount of data entered into it that cannot be reveresed. If the input changes even a tiny bit, the resulting hash should look completely different. Hashes are commonly cracked with methods like dictionary and brute force attacks, where the attacker keeps guessing the password until login is completed successfully. For a great overview on hashing, check out <a href="https://crackstation.net/hashing-security.htm">this site</a>.</p>
+<p>A good hashing function generates a fixed-length string for any amount of data entered into it that cannot be reveresed. If the input changes even a tiny bit, the resulting hash should look completely different. Hashes are commonly cracked with methods like dictionary and brute force attacks, where the attacker keeps guessing the password until login is completed successfully. For a great overview on hashing, check out <a href="//crackstation.net/hashing-security.htm">this site</a>.</p>
 
 <p><br /></p>
 <h2>Type 5 Passwords</h2>
-<p>Type 5 is the stronger of the 3550’s two password types and uses the MD5 hash function to obfuscate the stored password. MD5 has been around since the early 90s, so it is no surprise that it has already been severely compromised. However, considering the 3550’s end-of-sale date was in 2006 and many of the more severe attacks on MD5 (see <a href="https://en.wikipedia.org/wiki/Flame_(malware)">here</a>) came in this decade, MD5 was not a bad choice for a hashing function at the time. Today, though, we know that MD5 is vulnerable to brute-force and collision attacks. In practice, MD5 should not be used as a security mechanism, but is still often used as a checksum for basic data integrity validation caused by unintended corruption.</p>
+<p>Type 5 is the stronger of the 3550’s two password types and uses the MD5 hash function to obfuscate the stored password. MD5 has been around since the early 90s, so it is no surprise that it has already been severely compromised. However, considering the 3550’s end-of-sale date was in 2006 and many of the more severe attacks on MD5 (see <a href="//en.wikipedia.org/wiki/Flame_(malware)">here</a>) came in this decade, MD5 was not a bad choice for a hashing function at the time. Today, though, we know that MD5 is vulnerable to brute-force and collision attacks. In practice, MD5 should not be used as a security mechanism, but is still often used as a checksum for basic data integrity validation caused by unintended corruption.</p>
 
 <p><br /></p>
 <h2>Type 7 Passwords</h2>
 <p>The real problem is Cisco’s Type 7 passwords. These use Cisco’s own proprietary algorithm to hash each password. The hash function basically performs an XOR on each character in the password against a hex value in an array. In the resulting hash value, the first hex represents where in the array the XOR began, the rest of the hex values each represent a single character in the password XORed with the value in the array. Since the inverse of XOR happens to be XOR, if you know the array table, deciphering the password is incredibly straightforward. So not only does the length of the hash directly map to the length of the password, the hash is, by each’s very nature, easily reversable.</p>
 
-<p>Most of the scripts I found to decode Cisco’s passwords happen to be in Perl, so for the fun of it, I decided to try my hand at a quick Python script to do the job for me. The following is based on Daren Mattews’ Perl solution found <a href="http://mccltd.net/blog/?p=1034">here</a>. I did find another python solution <a href="https://gist.github.com/jayswan/1927995">here</a> by jayswan which is similar to mine but didn’t work on the hash values I was pulling out of my 3550’s config.</p>
+<p>Most of the scripts I found to decode Cisco’s passwords happen to be in Perl, so for the fun of it, I decided to try my hand at a quick Python script to do the job for me. The following is based on Daren Mattews’ Perl solution found <a href="//mccltd.net/blog/?p=1034">here</a>. I did find another python solution <a href="//gist.github.com/jayswan/1927995">here</a> by jayswan which is similar to mine but didn’t work on the hash values I was pulling out of my 3550’s config.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>import sys
 
@@ -197,7 +197,7 @@ else:
 </code></pre>
 </div>
 
-<p>If you run the above script on the hash 002D01090A681B0F0B245E, you will happily see that at one point I had my switch’s password set to IronSpider. :) You can find this script on GitHub <a href="https://github.com/pickl09/scripts/blob/master/ios7decrypt.py">here</a>.</p>
+<p>If you run the above script on the hash 002D01090A681B0F0B245E, you will happily see that at one point I had my switch’s password set to IronSpider. :) You can find this script on GitHub <a href="//github.com/pickl09/scripts/blob/master/ios7decrypt.py">here</a>.</p>
 
 
     <section class="signature">
@@ -213,10 +213,10 @@ else:
             <ul class="list-inline">
 
               <li>
-                  <a href="https://twitter.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                  <a href="//twitter.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
               </li>
               <li>
-                    <a href="https://github.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
+                    <a href="//github.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
               </li>
               <!--<li>
                   <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
@@ -286,7 +286,7 @@ else:
     <script src="/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="/js/classie.js"></script>
     <script src="/js/cbpAnimatedHeader.js"></script>
 

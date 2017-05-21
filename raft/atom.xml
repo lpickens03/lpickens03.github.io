@@ -5,7 +5,7 @@
  <link href="//www.laurapickens.net/atom.xml" rel="self"/>
  <link href="//www.laurapickens.net/"/>
  <updated>2017-05-19T11:02:05-04:00</updated>
- <id>http://www.laurapickens.net</id>
+ <id>//www.laurapickens.net</id>
  <author>
    <name>Laura Pickens</name>
    <email></email>
@@ -16,7 +16,7 @@
    <title>Home Lab - Setting Up DHCP and DNS with pfSense</title>
    <link href="//www.laurapickens.net/2017/05/13/lab_pfsense_dns/"/>
    <updated>2017-05-13T00:00:00-04:00</updated>
-   <id>http://www.laurapickens.net/2017/05/13/lab_pfsense_dns</id>
+   <id>//www.laurapickens.net/2017/05/13/lab_pfsense_dns</id>
    <content type="html">&lt;p&gt;My ISP wireless router is set up in the main living area. My lab, on the other hand, is on the second floor. I’d like to be able to access the internet from my lab network without having to open up the walls to string Cat5s or lay an extra long Cat5 up the stairs, thru the hallway and under the door to the lab switch. Additionally, with the loss of my “air gap”, I want to put in place a security solution (or at least phase 1 of a solution) to mitigate the risk of exposing my lab directly to the internet.&lt;/p&gt;
 
 &lt;p&gt;Thus I arrived at my solution: use a wireless bridge to connect my ISP wireless router to a firewall which will then be connected to my lab switch to provide internet to all. So my updated lab configuration will look something like this:&lt;/p&gt;
@@ -52,7 +52,7 @@
    <title>Cisco Type 7 Encryption - What's in a hash?</title>
    <link href="//www.laurapickens.net/2017/01/08/cisco_type_7/"/>
    <updated>2017-01-08T00:00:00-05:00</updated>
-   <id>http://www.laurapickens.net/2017/01/08/cisco_type_7</id>
+   <id>//www.laurapickens.net/2017/01/08/cisco_type_7</id>
    <content type="html">&lt;p&gt;After setting up the initial configuration on my Catalyst 3550 switches yesterday (see &lt;a href=&quot;/2017/01/07/fun_w_cisco/&quot;&gt;here&lt;/a&gt;), I decided to investigate exactly how weak the encryption on the switch’s passwords is. Turns out, a quick google search for “decrypt Cisco passwords” brings up a ton of tools and blog posts to help anyone who can gain access to the Cisco switch config decrypt the password.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -130,7 +130,7 @@ else:
    <title>Configuring Cisco Switches</title>
    <link href="//www.laurapickens.net/2017/01/07/fun_w_cisco/"/>
    <updated>2017-01-07T00:00:00-05:00</updated>
-   <id>http://www.laurapickens.net/2017/01/07/fun_w_cisco</id>
+   <id>//www.laurapickens.net/2017/01/07/fun_w_cisco</id>
    <content type="html">&lt;p&gt;This weekend as part of my ongoing endeavor to get my home lab up and running, I tackled my first proper Cisco switch. Two Cisco Catalyst 3550 switches had been donated to my cause a few months back and I finally had the time to configure them today.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/posts/2017-01-07/cat3550s.bmp&quot; alt=&quot;Cisco Catalyst 3550s&quot; /&gt;&lt;/p&gt;
@@ -288,7 +288,7 @@ else:
    <title>Code - The Hidden Language of Computer Hardware and Software</title>
    <link href="//www.laurapickens.net/books/2017-01-10-code/"/>
    <updated>2017-01-10T00:00:00-05:00</updated>
-   <id>http://www.laurapickens.net/books/code</id>
+   <id>//www.laurapickens.net/books/code</id>
    <content type="html">&lt;p&gt;Coming soon!&lt;/p&gt;
 
 </content>
@@ -298,7 +298,7 @@ else:
    <title>Where Wizards Stay Up Late - The Origins Of The Internet</title>
    <link href="http://www.laurapickens.net/books/2017-01-11-whenwizards/"/>
    <updated>2017-01-11T00:00:00-05:00</updated>
-   <id>http://www.laurapickens.net/books/whenwizards</id>
+   <id>//www.laurapickens.net/books/whenwizards</id>
    <content type="html">&lt;p&gt;Coming soon!&lt;/p&gt;
 
 </content>
@@ -306,9 +306,9 @@ else:
  
  <entry>
    <title>The Chip - How Two Americans Invented the Microchip and Launched a Revolution</title>
-   <link href="http://www.laurapickens.net/books/2017-01-12-thechip/"/>
+   <link href="//www.laurapickens.net/books/2017-01-12-thechip/"/>
    <updated>2017-01-12T00:00:00-05:00</updated>
-   <id>http://www.laurapickens.net/books/thechip</id>
+   <id>//www.laurapickens.net/books/thechip</id>
    <content type="html">&lt;p&gt;While electrical engineering and physics are two fields I have little formal education in, I’ve always enjoyed learning more about them, especially as they pertain to computers. So I picked up &lt;i&gt;The Chip&lt;/i&gt; with the hopes of learning more about the inner workings of microchips as well as the people who helped create what is arguably the greatest invention of the 20th century. I was not disappointed. &lt;i&gt;The Chip&lt;/i&gt; managed to find a good balance between the technical and the narrative to craft an engaging story. While there were some missed opportunities to dive deeper into the technical, the primary goal of this book was to offer a historical perspective on the evolution of a critical piece of technology and to that it definitely delivered.&lt;/p&gt;
 
 &lt;h2&gt;The Tyranny of Numbers&lt;/h2&gt;
@@ -338,9 +338,9 @@ else:
  
  <entry>
    <title>The Worm - The First Digital World War</title>
-   <link href="http://www.laurapickens.net/books/2017-01-13-worm/"/>
+   <link href="//www.laurapickens.net/books/2017-01-13-worm/"/>
    <updated>2017-01-13T00:00:00-05:00</updated>
-   <id>http://www.laurapickens.net/books/worm</id>
+   <id>//www.laurapickens.net/books/worm</id>
    <content type="html">&lt;p&gt;I originally read &lt;i&gt;The Worm&lt;/i&gt; back in 2016, well before DDOS (Distributed Denial of Service) attacks and botnets made a media splash with the &lt;a href=&quot;https://www.incapsula.com/blog/malware-analysis-mirai-ddos-botnet.html&quot;&gt;Mirai botnet attacks&lt;/a&gt; in October that year. Botnets and the worms that create them are nothing new. They’ve been plaguing institutions, particularly in the financial sector, with DDOS attacks for years. &lt;i&gt;The Worm&lt;/i&gt; offers some interesting perspectives on one of the first concerted and coordinated efforts to stop a worm in its tracks (though calling it the first digital war is probably pushing it). The primary subject of the book is the Conficker worm. It was first discovered back in 2008 and was predicted to grow large enough to bring down the internet if left unchecked. It’s discovery spawned massive research and counterefforts by the internet security community and eventually a global effort took place to try and reduce its strangle hold on the internet. Interestingly, and as often is the case with these things, the Conficker worm was never stopped. In fact, as of 2015, it &lt;a href=&quot;https://www.grahamcluley.com/seven-years-conficker-worm-dead-dominating/&quot;&gt;remains out there in the wild with around 600,000 zombies to it’s name&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2&gt;The Worm&lt;/h2&gt;
@@ -366,9 +366,9 @@ else:
  
  <entry>
    <title>We Are Anonymous - Inside the Hacker World of LulzSec, Anonymous, and the Global Cyber Insurgency</title>
-   <link href="http://www.laurapickens.net/books/2017-01-22-weareanon/"/>
+   <link href="//www.laurapickens.net/books/2017-01-22-weareanon/"/>
    <updated>2017-01-22T00:00:00-05:00</updated>
-   <id>http://www.laurapickens.net/books/weareanon</id>
+   <id>//www.laurapickens.net/books/weareanon</id>
    <content type="html">&lt;p&gt;&lt;i&gt;We Are Anonymous&lt;/i&gt; is a compelling and entertaining read. While light on technical details and rife with dubious sources (Olson bases a lot of the embellishments in her narrative on interviews with “members” of Anonymous who arguably have been known to spin a tale or two), &lt;i&gt;We Are Anonymous&lt;/i&gt; excels most when offering insight into the people and motives that drive the underbelly of the internet. My primary interest in reading this book was to get a concise overview of how the Anonymous movement evolved and what specific attacks have been attributed to them. In the next section or two I will summarize the evolution of the Anonymous movement based on this book and then take a moment to review my key takeaways from the book itself.
 &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -410,9 +410,9 @@ else:
  
  <entry>
    <title>Ghost in the Wire</title>
-   <link href="http://www.laurapickens.net/books/2017-03-20-ghostinwires/"/>
+   <link href="//www.laurapickens.net/books/2017-03-20-ghostinwires/"/>
    <updated>2017-03-20T00:00:00-04:00</updated>
-   <id>http://www.laurapickens.net/books/ghostinwires</id>
+   <id>//www.laurapickens.net/books/ghostinwires</id>
    <content type="html">&lt;p&gt;A crime thriller, blast to the technical past and deep education on the woes of social engineering, &lt;i&gt;Ghost in the Wires&lt;/i&gt; proved to be a fantastic and delightful read.&lt;/p&gt;
 
 </content>
