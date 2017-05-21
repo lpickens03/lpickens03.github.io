@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="//www.w3.org/2005/Atom">
+
+ <title>Laura Pickens</title>
+ <link href="//www.laurapickens.net/atom.xml" rel="self"/>
+ <link href="//www.laurapickens.net/"/>
+ <updated>2017-05-19T11:02:05-04:00</updated>
+ <id>http://www.laurapickens.net</id>
+ <author>
+   <name>Laura Pickens</name>
+   <email></email>
+ </author>
+
+ 
+ <entry>
+   <title>Home Lab - Setting Up DHCP and DNS with pfSense</title>
+   <link href="//www.laurapickens.net/2017/05/13/lab_pfsense_dns/"/>
+   <updated>2017-05-13T00:00:00-04:00</updated>
+   <id>http://www.laurapickens.net/2017/05/13/lab_pfsense_dns</id>
+   <content type="html">&lt;p&gt;My ISP wireless router is set up in the main living area. My lab, on the other hand, is on the second floor. I’d like to be able to access the internet from my lab network without having to open up the walls to string Cat5s or lay an extra long Cat5 up the stairs, thru the hallway and under the door to the lab switch. Additionally, with the loss of my “air gap”, I want to put in place a security solution (or at least phase 1 of a solution) to mitigate the risk of exposing my lab directly to the internet.&lt;/p&gt;
+
+&lt;p&gt;Thus I arrived at my solution: use a wireless bridge to connect my ISP wireless router to a firewall which will then be connected to my lab switch to provide internet to all. So my updated lab configuration will look something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/2017-05-14/lab_phase_1.png&quot; alt=&quot;Lab Phase 1 Network Diagram&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The benefits of a firewall are three-fold: the ability to filter incoming and outgoing traffic, to hide my private lab network from the internet with NAT, and provide me a proper firewall to play with rather than just the VyOS VMs I’ve had to play with so far. I chose pfSense for the firewall simply because it’s an open source solution that comes highly recommended and it’s something I haven’t played with yet. I am trying to stick to open source solutions as much as possible with my lab to save some money (another reason I’m using VirtualBox as a hypervisor for my VMs rather than VMWare).&lt;/p&gt;
+
+&lt;p&gt;Setting up the wireless bridge and pfSense was actually pretty straight forward. In the end what actually cost me the most time and headaches was getting my DNS configuration right. Since I couldn’t find a guide online that fit my particular needs, I’ve documented my setup here.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Setting Up DHCP&lt;/h2&gt;
+&lt;p&gt;I was going back and forth for a while on whether I should use pfSense’s built in tools to set up DHCP and DNS on my network. In the end, I decided to give it a shot rather than set up a separate VM running a DHCP and DNS server. First, I had to make sure DHCP was disabled on both my wireless router and the new wireless bridge. Running two DHCP servers on the same network can and will cause IP conflicts and break the network unless they are properly configured to split the scope of IP addresses on the same subnet. For my small lab net, this is unnecessary.&lt;/p&gt;
+
+&lt;p&gt;pfSense provides a pretty easy way to set this up. First, you go to Services -&amp;gt; DHCP Server. The page for configuring DHCP for your LAN connection will be displayed. Here you will enable DHCP for the LAN interface and it will use the current IP settings for that LAN to decide what IP range it will offer hosts requesting IP addresses. If you scroll all the way to the bottom of this page, you can add static IP mappings so that hosts on the network will always receive the same IP address each time they boot up. All you need to do is hit “Add”, fill in the host’s MAC address and the desired IP address as well as it’s host name and you are good to go.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Setting Up DNS&lt;/h2&gt;
+&lt;p&gt;This is where I ran into problems. DHCP conventiently instructs clients on where to look for DNS and by default points them all to the pfSense as the primary DNS server. pfSense has two DNS options: the DNS Forwarder and the DNS Resolver. DNS Forwarder just forwards all DNS requests to another DNS server with recursive caching capabilities using bind. DNS Resolver uses Unbound as a recursive caching DNS server with DNSSEC capabilities. By default, pfSense has the DNS Resolver configured on the LAN to handle DNS requests to the DNS servers configured by your ISP provider on the WAN connection. This works fine as is until you want to add internal DNS mappings to pfSense. Really what it came down to is that I needed an external DNS server to handle internet DNS requests and an internal DNS server to handle local DNS requests. I found a few guides that claimed pfSense could act as the internal DNS Server and forward internet requests to the external DNS Servers assigned by the ISP with DNS Resolver. However, the performance hit when loading web pages as well as the reduced reliability of DNS in general made this solution intolerable.&lt;/p&gt;
+
+&lt;p&gt;In the end, I disabled both pfSense’s DNS services and checked the “Do not use the DNS Forwarder/DNS Resolver as a DNS server for the firewall” on pfSense’s general setup page. I then set up my own internal DNS server using bind9 on an Ubuntu 16.04 box on my network. This server I set up to forward requests to a set of external DNS servers. Since your ISP’s DNS servers aren’t always the fastest ones available I followed &lt;a href=&quot;https://www.ceos3c.com/2016/11/29/improve-surfing-speed-with-namebench/&quot;&gt;this guide&lt;/a&gt; to use the namebench tool to find my top three DNS servers for internet DNS requests. Google’s Public DNS, Norton’s DNS, and RoadRunner’s DNS offered me the best performance.&lt;/p&gt;
+
+&lt;p&gt;Following &lt;a href=&quot;www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-private-network-dns-server-on-ubuntu-16-04&quot;&gt;this tutorial&lt;/a&gt;, I then set up bind9 on my Ubuntu box. The only addition I made to the steps outlined in the link (aside from changing the IP range and zone names to match what I had set up on the pfSense DHCP server) is updating the forwarder section under the options section in the named.conf.options file with the list of three external DNS servers found with namebench. I then updated the DHCP server on pfSense to set this Ubuntu box’s IP address as the DNS Server for all client’s requesting IP addresses.&lt;/p&gt;
+
+&lt;p&gt;After renewing my DHCP leases on each of my DHCP clients, things were looking good except for the Ubuntu box running the DNS server. When I tried to ping anything from there I got the special IP address “127.0.53.53”. This indicates that I am getting DNS name collisions on my internal network (the 53 in the IP address implies port 53, the DNS server port). I had a fun time figuring out that Ubuntu’s Network Manager’s default settings automatically configures the dnsmasq program as a local forwarding nameserver listening on 127.0.1.1. Meaning I was actually running two DNS services on Ubuntu causing these collisions. I had to edit /etc/NetworkManager/NetworkManager.conf to comment out “dns=dnsmasq” and then restart the network-manager service to clean up the list of DNS servers it was generating in /etc/resolv.conf.&lt;/p&gt;
+
+&lt;p&gt;With these last few changes made, I had a happy network with internet access and host names and IP addresses resolving correctly. I could now focus on actually configuring pfSense to be a firewall (it’s default rule is your typical “allow all” making it completely useless as a security measure without some time spent configuring it). That, of course, will be another post.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Cisco Type 7 Encryption - What's in a hash?</title>
+   <link href="//www.laurapickens.net/2017/01/08/cisco_type_7/"/>
+   <updated>2017-01-08T00:00:00-05:00</updated>
+   <id>http://www.laurapickens.net/2017/01/08/cisco_type_7</id>
+   <content type="html">&lt;p&gt;After setting up the initial configuration on my Catalyst 3550 switches yesterday (see &lt;a href=&quot;/2017/01/07/fun_w_cisco/&quot;&gt;here&lt;/a&gt;), I decided to investigate exactly how weak the encryption on the switch’s passwords is. Turns out, a quick google search for “decrypt Cisco passwords” brings up a ton of tools and blog posts to help anyone who can gain access to the Cisco switch config decrypt the password.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Hashing vs Encryption&lt;/h2&gt;
+&lt;p&gt;Interestingly, Cisco has two forms of “encryption” on Catalyst switches: Type 5 and Type 7. Type 5 is used for the secret password that you can set for “enable” mode. Type 7 is used across all other passwords and is activated when you enable the password-encryption services on the switch. Cisco referring to these types as encryption is a misnomer, neither actually uses encryption to process the passwords before storing them.&lt;/p&gt;
+
+&lt;p&gt;Instead, both types refer to different hashing functions. Hashing is not the same as encryption. A hash function is intended to only be able to go one way, making it impossible to derive the original string from the hash. This is perfect for passwords as only the user needs to know what the original string is. When the user enters the password string, the system just runs it through the hash function and then compares the resulting hash to the stored hash. Encryption, on the other hand, is intended to be reversable: with a special key you can decrypt the ciphertext back into the original plaintext.&lt;/p&gt;
+
+&lt;p&gt;A good hashing function generates a fixed-length string for any amount of data entered into it that cannot be reveresed. If the input changes even a tiny bit, the resulting hash should look completely different. Hashes are commonly cracked with methods like dictionary and brute force attacks, where the attacker keeps guessing the password until login is completed successfully. For a great overview on hashing, check out &lt;a href=&quot;https://crackstation.net/hashing-security.htm&quot;&gt;this site&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Type 5 Passwords&lt;/h2&gt;
+&lt;p&gt;Type 5 is the stronger of the 3550’s two password types and uses the MD5 hash function to obfuscate the stored password. MD5 has been around since the early 90s, so it is no surprise that it has already been severely compromised. However, considering the 3550’s end-of-sale date was in 2006 and many of the more severe attacks on MD5 (see &lt;a href=&quot;https://en.wikipedia.org/wiki/Flame_(malware)&quot;&gt;here&lt;/a&gt;) came in this decade, MD5 was not a bad choice for a hashing function at the time. Today, though, we know that MD5 is vulnerable to brute-force and collision attacks. In practice, MD5 should not be used as a security mechanism, but is still often used as a checksum for basic data integrity validation caused by unintended corruption.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Type 7 Passwords&lt;/h2&gt;
+&lt;p&gt;The real problem is Cisco’s Type 7 passwords. These use Cisco’s own proprietary algorithm to hash each password. The hash function basically performs an XOR on each character in the password against a hex value in an array. In the resulting hash value, the first hex represents where in the array the XOR began, the rest of the hex values each represent a single character in the password XORed with the value in the array. Since the inverse of XOR happens to be XOR, if you know the array table, deciphering the password is incredibly straightforward. So not only does the length of the hash directly map to the length of the password, the hash is, by each’s very nature, easily reversable.&lt;/p&gt;
+
+&lt;p&gt;Most of the scripts I found to decode Cisco’s passwords happen to be in Perl, so for the fun of it, I decided to try my hand at a quick Python script to do the job for me. The following is based on Daren Mattews’ Perl solution found &lt;a href=&quot;http://mccltd.net/blog/?p=1034&quot;&gt;here&lt;/a&gt;. I did find another python solution &lt;a href=&quot;https://gist.github.com/jayswan/1927995&quot;&gt;here&lt;/a&gt; by jayswan which is similar to mine but didn’t work on the hash values I was pulling out of my 3550’s config.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import sys
+
+&quot;&quot;&quot;
+Vigenere translation table
+&quot;&quot;&quot;
+global xlat
+xlat = [0x64, 0x73, 0x66, 0x64, 0x3b, 0x6b, 0x66, 0x6f, 
+		0x41, 0x2c, 0x2e, 0x69, 0x79, 0x65, 0x77, 0x72, 
+		0x6b, 0x6c, 0x64, 0x4a, 0x4b, 0x44, 0x48, 0x53, 
+		0x55, 0x42, 0x73, 0x67, 0x76, 0x63, 0x61, 0x36, 
+		0x39, 0x38, 0x33, 0x34, 0x6e, 0x63, 0x78, 0x76, 
+		0x39, 0x38, 0x37, 0x33, 0x32, 0x35, 0x34, 0x6b, 
+		0x3b, 0x66, 0x67, 0x38, 0x37]
+
+&quot;&quot;&quot;
+Decryption Algorithm
+&quot;&quot;&quot;
+def decrypt(password):
+
+	# Break Cipher into Hex Values
+	password_hex = []
+	for i in range(0,len(password),2):
+		password_hex.append(password[i:i+2])
+
+	# Look Up Hex Values in Vigenere translation table
+	password_chars = []
+	index = int(password_hex[0],16)
+	for i in range(1,len(password_hex)):
+		password_chars.append(chr(int(password_hex[i],16) ^ xlat[index]))
+		index = index + 1 % 53 # wrap around if necessary
+
+	plaintext = &#39;&#39;.join(password_chars)
+
+	return plaintext
+
+&quot;&quot;&quot;
+Main
+&quot;&quot;&quot;
+if len(sys.argv) == 2:
+	ciphertext = sys.argv[1]
+	print (&quot;Cipher Text is %s&quot; % ciphertext)
+	print (&quot;Plain Text is %s&quot; % decrypt(ciphertext))
+else:
+	print (&quot;Error - Incorrect # of args&quot;)
+	print (&quot;Example Usage: python ios7decrypt.py 002D01090A681B0F0B245E&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If you run the above script on the hash 002D01090A681B0F0B245E, you will happily see that at one point I had my switch’s password set to IronSpider. :) You can find this script on GitHub &lt;a href=&quot;https://github.com/pickl09/scripts/blob/master/ios7decrypt.py&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Configuring Cisco Switches</title>
+   <link href="//www.laurapickens.net/2017/01/07/fun_w_cisco/"/>
+   <updated>2017-01-07T00:00:00-05:00</updated>
+   <id>http://www.laurapickens.net/2017/01/07/fun_w_cisco</id>
+   <content type="html">&lt;p&gt;This weekend as part of my ongoing endeavor to get my home lab up and running, I tackled my first proper Cisco switch. Two Cisco Catalyst 3550 switches had been donated to my cause a few months back and I finally had the time to configure them today.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/2017-01-07/cat3550s.bmp&quot; alt=&quot;Cisco Catalyst 3550s&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I was starting from square one with familiarizing myself with the 3550s’ CLI. The switches had previously been used in a retail store of some sort so there was the added fun of restoring each switch to factory settings. At the end of the day, my goal was to break up the 48 FastEthernet ports into several vlans in prep for being connected up to my home lab network.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Connecting to the Switch&lt;/h2&gt;
+&lt;p&gt;One of the first things I realized I needed was a console cable. I had no idea what IP address the switch was currently set to, so attaching an ethernet cable and attempting to telnet in would do me no good. Since my MacBook supports limited ports, I used this &lt;a href=&quot;https://www.amazon.com/gp/product/B00I8CT8YG/ref=oh_aui_detailpage_o00_s00?ie=UTF8&amp;amp;psc=1&quot;&gt;USB to DB9 Cisco Console Cable&lt;/a&gt; shown below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/2017-01-07/control_cable.bmp&quot; alt=&quot;USB to DB9 Cisco Console Cable&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once my Mac and the switch were connected, I just had to find the associated usb device under /dev and run the following command:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt; screen /dev/tty.usbserial-AL00B2R5 9600 &lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Note in the above the 9600 refers to the baud rate of the console port which can be found in the documentation for the switch.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Back to Factory Defaults&lt;/h2&gt;
+&lt;p&gt;This successfully brought up a connection with the switch. Unfortunately, it became clear that there wasn’t much I could do without the password to allow me to edit the switch configuration. While I could attempt to recover the password, since I had no need to save the original switch config, I opted to restore it to factory defaults.&lt;/p&gt;
+
+&lt;p&gt;To do this, I simply unplugged the switch, held down the mode button on the front and plugged it in again. The only snag I ran into here, which admittedly took me a while to figure out, is that I needed to unplug the console cable before I turned the switch back on from both the switch and the Mac. Otherwise, when I tried to connect to the switch with the console cable, I’d either get a busy signal or a blank screen. Once this was sorted though, I successfully brought up the switch prompt.&lt;/p&gt;
+
+&lt;p&gt;I then followed Cisco’s instructions found &lt;a href=&quot;http://www.cisco.com/image/gif/paws/12040/pswdrec_2900xl.pdf&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I used the following commands to initialize the flash file system:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;switch: flash_init&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;switch: load_helper&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;I then found the original configuration file and renamed it:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;switch: dir flash:&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;switch: rename flash:config.text config.old&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, I booted up the switch:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;switch: boot&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Initial Configuration&lt;/h2&gt;
+&lt;p&gt;Upon reboot, it enters initial configuration mode. I hit “&lt;strong&gt;n&lt;/strong&gt;” to abort this and got the default Switch prompt. I then entered “&lt;strong&gt;en&lt;/strong&gt;” to enter “enable” mode or what I think of as admin mode and voila! No password required and I am now able to set up the switch as I like. For the start, I followed &lt;a href=&quot;https://www.youtube.com/watch?v=n_3CHv9bXdc&quot;&gt;this tutorial&lt;/a&gt; I found on youtube. The poster, &lt;a href=&quot;https://www.youtube.com/channel/UCV0w1MlGfnPe9kR1jmBjGLQ&quot;&gt; Jorge Almazan&lt;/a&gt;, included a good set of “recommended settings” which I will paraphrase in the following sections.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Configuring the Switch&lt;/h2&gt;
+&lt;p&gt;Before diving into the details of the configuration, a quick overview of how the switch config if updated and saved.&lt;/p&gt;
+
+&lt;p&gt;In order to configure the switch you need to enter configuration mode. To enter configuration mode you run the following command:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;configure terminal&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;To exit configuration mode, you enter:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;end&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;All of the updates you are making to the configuration are only saved into the switch’s running configuration. If you rebooted the switch at any point, it would load the starting configuration and any updates you made to it’s running configuration would be lost. Therefore, you should frequently save your changes as you go with this command run in “enable” mode:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;copy running-config startup-config&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The following sections assume you are entering and leaving configuration mode appropriately and saving your configuration frequently along the way.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Security&lt;/h2&gt;
+&lt;p&gt;There are a number of items you need to configure initially. First and foremost, are the logins and passwords. The first password you want to set is for “enable” mode, so basically your root password. You set this as follows:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;enable secret &amp;lt;your password&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;You also want to set a password on your switch’s console so that whenever someone logs into the switch they are prompted for a password. To configure the console’s settings you enter:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;line console 0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Once run, the following commands you run are applied only to the console. Here we want to set the console’s password, require users to login and set a timeout period to automatically log the user out after a number of minutes and/or seconds.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;password &amp;lt;your password&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;login&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;exec-timeout 30 0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;While inside the console’s configuration, there are also some additional settings you can make to improve your interface with the console. One I highly recommend prevents the command line from being split in two by log messages:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;logging synchronous&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;To leave the console configuration mode, you run:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;exit&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;As the line name implies, this password is only for the console reached via the console cable we are currently using. Normally, once the switch is configured, you’d be using either &lt;strong&gt;telnet&lt;/strong&gt; or, preferably from a security standpoint, &lt;strong&gt;ssh&lt;/strong&gt; to access the switch remotely over the network. The 3550s allow you to set access controls for remote users with virtual terminal lines, or “vty”. My 3550s support up to 16 simultaneous connections so the command to enter the vty configuration mode for all connections would be&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;line vty 0 15&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;With this command, you are now in vty’s configuration. All the settings applied to the console’s configuration should also be applied here.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, the default settings on the switch store these passwords in plain text. If you run&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;show running-config&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;in “enable mode”, you will see the passwords crystal clear listed in the configuration. To encrypt the passwords where they are stored, you will want to run&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;service password encryption&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now if you check the running config, a hash of the password is shown to mask it from prying eyes. Unfortunately, the hashing functions that these switches use are not strong and with minimal effort the passwords can be derived from the hash. I take a deeper look into the Catalyst’s weak hashing functions in &lt;a href=&quot;/2017/01/08/cisco_type_7/&quot;&gt;this post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Miscellaneous Settings&lt;/h2&gt;
+&lt;p&gt;To set the login banner:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;banner motd [&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;To set the hostname of the switch:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;hostname &amp;lt;your switch&#39;s name&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;VLANs&lt;/h2&gt;
+&lt;p&gt;The default vlan used by all of the switch’s ports is vlan 1. I need to break the switch up into multiple vlans to support my network’s segregation.&lt;/p&gt;
+
+&lt;p&gt;First I need to create the new vlans:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;vlan &amp;lt;vlan #&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;name &amp;lt;name of vlan (for your reference)&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;exit&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;I then need to assign each port to a vlan. I could do this for each port individually, but, fortunately, the 3550s allow you to assign a configure a range of interfaces at once. In the below commands x represents the first ethernet port in the range and y represents the last port. You can find the port numbers on the physical ports or get a list with the “&lt;strong&gt;show ip interface brief&lt;/strong&gt;” command.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;interface range fastethernet 0/x – y&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;switchport mode access&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;switchport access vlan &amp;lt;vlan #&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;exit&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;To set an IP address range to your vlan, you have to add interfaces for each of your vlans. Once you create the interface, you then add your ip address of choice and the subnet mask to dictate the range of ip addresses that will be on that vlan.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;interface vlan &amp;lt;vlan #&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ip address 10.0.0.1 255.255.255.0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;With the ip address set for the vlan, you can connect a device to one of the ports, set the device’s IP address within that IP address range and then ping the switch on the IP address you set for the vlan that port is using.&lt;/p&gt;
+
+&lt;p&gt;All of this is just the tip of the iceberg as far as switch configuration goes and fully integrating these switches into my lab’s network. I look forward to posting additional updates as I learn more about these switches and how best to use them.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+
+ 
+ <entry>
+   <title>Code - The Hidden Language of Computer Hardware and Software</title>
+   <link href="//www.laurapickens.net/books/2017-01-10-code/"/>
+   <updated>2017-01-10T00:00:00-05:00</updated>
+   <id>http://www.laurapickens.net/books/code</id>
+   <content type="html">&lt;p&gt;Coming soon!&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Where Wizards Stay Up Late - The Origins Of The Internet</title>
+   <link href="http://www.laurapickens.net/books/2017-01-11-whenwizards/"/>
+   <updated>2017-01-11T00:00:00-05:00</updated>
+   <id>http://www.laurapickens.net/books/whenwizards</id>
+   <content type="html">&lt;p&gt;Coming soon!&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>The Chip - How Two Americans Invented the Microchip and Launched a Revolution</title>
+   <link href="http://www.laurapickens.net/books/2017-01-12-thechip/"/>
+   <updated>2017-01-12T00:00:00-05:00</updated>
+   <id>http://www.laurapickens.net/books/thechip</id>
+   <content type="html">&lt;p&gt;While electrical engineering and physics are two fields I have little formal education in, I’ve always enjoyed learning more about them, especially as they pertain to computers. So I picked up &lt;i&gt;The Chip&lt;/i&gt; with the hopes of learning more about the inner workings of microchips as well as the people who helped create what is arguably the greatest invention of the 20th century. I was not disappointed. &lt;i&gt;The Chip&lt;/i&gt; managed to find a good balance between the technical and the narrative to craft an engaging story. While there were some missed opportunities to dive deeper into the technical, the primary goal of this book was to offer a historical perspective on the evolution of a critical piece of technology and to that it definitely delivered.&lt;/p&gt;
+
+&lt;h2&gt;The Tyranny of Numbers&lt;/h2&gt;
+&lt;p&gt;Before the transistor, all electronic devices were built with vacuum tubes. Vacuum tubes served as both an amplifier for the electric current passing through it as well as the essential “on/off” fuction required for logical functions so essential to computers (think binary and boolean). Unfortunately, vacuum tubes were large, fragile, and power hungry things that got incredibly hot. Engineers had to keep the limitations of vacuum tubes in mind when designing circuits to prevent hardware from melting from the incredible heat pouring out of these tubes. Fun fact: The warmth and glow of the tubes also constantly attracted moths and other insects to the delicate innards of the computer causing short circuits. Maintenance of these systems required constant “debugging”, coining the popular term still used to refer to the process of fixing a computer.&lt;/p&gt;
+
+&lt;p&gt;The transistor was invented in 1947 by a group at Bell Labs and quickly replaced vacuum tubes as the superior technology. Transistors provide the same key functions as vacuum tubes–amplifying a signal and rapid on-off switching–by moving electronic charges along controlled paths inside a block of semiconductor material like silicon or germanium. Transistors are lighter, smaller, and over 20 times faster than vacuum tubes. With the transistor entering the scene, the potential of circuits was finally fully unleashed.&lt;/p&gt;
+
+&lt;p&gt;There are four primary components which can be combined in a variety of ways to make a circuit:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Resistor - restricts the flow of electricity to provide the circuit designer with precise control of the current at any given point&lt;/li&gt; 
+&lt;li&gt;The Capacitor - absorbs electrical energy and can then release when triggered&lt;/li&gt;
+&lt;li&gt;The Diode -  blocks the current under some conditions and allows the current to flow under others&lt;/li&gt;
+&lt;li&gt;The Transistor - turns current flow on and off, sending digital (i.e. binary 0s and 1s) signals over the circuit&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Because of the transistor’s amplifying effects, a circuit can be as large and complex as you want, made of almost any combination of the above components. The more complex the task the circuit is performing, the more components it needs. A circuit can easily require thousands if not millions of these components to perform the type of complex tasks that were only able to be read about in science fiction in the 1950s. The key, however, is that the circuit must be complete and unbroken in order to effectively pass the electronic current on to the next node in the circuit. If any one of these components in the circuit fails, the circuit is broken and system fails.&lt;/p&gt;
+
+&lt;p&gt;So while on paper engineers could dream up the most complex and beautiful circuits their minds could imagine, the act of manufacturing these systems was complex, arduous and rife with bugs. At the time there was no machine to build out these complex circuits, each individual component had to be sodered by hand to a wire connecting it to the next component. The industry quickly realized that this technology was limited by what was referred to as the “tyranny of numbers”. The more components you add to a circuit the more advanced your product, but also the more likely your product would be to never get off the manufacturing floor due to constant component failures and set backs. The computers we have today which have millions of components and interconnections, would be impossible to mass produce with these methods.&lt;/p&gt;
+
+&lt;h2&gt;The Microchip&lt;/h2&gt;
+&lt;p&gt;Thus a race to solve the “tyranny of numbers” problem began throughout the industry. &lt;i&gt;The Chip&lt;/i&gt; follows two men who ended up separately developing the same solution to the problem. First was Jack Kilby, an electrical engineer working at Texas Instruments in their semiconductor research group. The other was Robert Noyce, a physicist in the early days of building his own company in what is today known as Silicon Valley in San Francisco.&lt;/p&gt;
+
+&lt;p&gt;In 1959, both of these men, only a few months apart came to the same conclusion that would lead to the birth of the microchip: connecting multiple devices on a single piece of silicon in order to make interconnections part of the manufacturing process to drasticlly reduce the cost, weight and size of each element.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>The Worm - The First Digital World War</title>
+   <link href="http://www.laurapickens.net/books/2017-01-13-worm/"/>
+   <updated>2017-01-13T00:00:00-05:00</updated>
+   <id>http://www.laurapickens.net/books/worm</id>
+   <content type="html">&lt;p&gt;I originally read &lt;i&gt;The Worm&lt;/i&gt; back in 2016, well before DDOS (Distributed Denial of Service) attacks and botnets made a media splash with the &lt;a href=&quot;https://www.incapsula.com/blog/malware-analysis-mirai-ddos-botnet.html&quot;&gt;Mirai botnet attacks&lt;/a&gt; in October that year. Botnets and the worms that create them are nothing new. They’ve been plaguing institutions, particularly in the financial sector, with DDOS attacks for years. &lt;i&gt;The Worm&lt;/i&gt; offers some interesting perspectives on one of the first concerted and coordinated efforts to stop a worm in its tracks (though calling it the first digital war is probably pushing it). The primary subject of the book is the Conficker worm. It was first discovered back in 2008 and was predicted to grow large enough to bring down the internet if left unchecked. It’s discovery spawned massive research and counterefforts by the internet security community and eventually a global effort took place to try and reduce its strangle hold on the internet. Interestingly, and as often is the case with these things, the Conficker worm was never stopped. In fact, as of 2015, it &lt;a href=&quot;https://www.grahamcluley.com/seven-years-conficker-worm-dead-dominating/&quot;&gt;remains out there in the wild with around 600,000 zombies to it’s name&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;The Worm&lt;/h2&gt;
+&lt;p&gt;A worm is a piece of malware that replicates itself in order to spread to other computers. This is distinctly different from what one would call a virus which is  dependent on some action by the user to allow it to infect the system. Worms spread all on their own. Once one successfully infects a computer, it usually installs a backdoor of some sort to allow it to remotely control the computer and scans the network for additional vulnerable systems to move to. The infected computer is then available to the orchestrator of the malware as a sort of zombie soldier. It can be used for a variety of purposes, from sending spam to performing DOS (Denial of Service) attacks. Networks of these zombie machines are called botnets.&lt;/p&gt;
+
+&lt;p&gt;The Conficker worm, the main character of this book, came into the limelight in the 2008/2009 timeframe. It exploited the Microsoft Windows vulnerability MS08-067. While Microsoft patched this vulnerability almost immediately after it was discovered, people are notoriously slow at patching their systems. Some systems, especially those running embedded Windows on them, can’t actually be updated without significant cost to the owner. The problem is further exacerbated by those running pirated copies of Windows which do not receive regular security updates. As long as there are vulnerable systems connected to the internet, the Conficker worm can continue to spread and be used for malicious activities.&lt;/p&gt;
+
+&lt;h2&gt;Countermeasures&lt;/h2&gt;
+&lt;p&gt;While I would have enjoyed it if this book made an effort to dig deeper into the technical workings of Conficker, Bowden chose instead to focus on the rag tag team of security researchers, experts and engineers who formed a group they called the “Cabal” to fight Conficker. They were the first to see it spread from an initial 179,000 infected hosts to an estimated 83 million potential infections and the first to report the potential fallout if a botnet of that size was used for “evil”. The team monitored the evolution of Conficker and attempted to prevent it from activating by registering all of the potential domains that the worm might use to receive instructions from once triggered.&lt;/p&gt;
+
+&lt;p&gt;The Cabal also attempted to coordinate across the loosely structured and poorly regulated internet backbone, a federal government notoriously slow to take action against the growing threat of cyber warfare and a media that prefers to hyperbolize the facts rather than report them. These endeavors were met with mixed results. In the end, there was no definitive winner or loser. The doomsday scenario never happened. Conficker was rented out to the highest bidder to spread malware and spam rather than take out a country. Overtime, it’s presence has slowly degraded as users have either patched their systems or moved to different operating systems entirely. So again, calling this a “digital war” is a bit of an exageration.&lt;/p&gt;
+
+&lt;h2&gt;The Writing&lt;/h2&gt;
+&lt;p&gt;With books like &lt;i&gt;Killing Pablo&lt;/i&gt;, &lt;i&gt;Black Hawk Down&lt;/i&gt; and &lt;i&gt;The Killing of Osama Bin Laden&lt;/i&gt; in his portfolio, its no surprise that the author, Mark Bowden, seemed to struggle a bit making computers exciting to his audience in &lt;i&gt;The Worm&lt;/i&gt;. He compensates for the lack of action by sprinkling analogies of good vs evil, superheroes, ninjas and cowboys throughout his writing. The point, I assume, is to try to paint a more dramatic picture of the situation for the reader. Either that or he assumed his audience was full of stereotypical nerds straight out of &lt;i&gt;The Big Bang Theory&lt;/i&gt;. Either way, it fell flat on me and I happen to love the X-men which was his favorite analogy to thread thoughout the book.&lt;/p&gt;
+
+&lt;p&gt;The danger of these analogies is that they portray the ability to understand how computers and the internet work as some kind of superpower only a few proper nerds can ever hope to understand. Bowden referred to the “Glaze” as the state ordinary people fall into when listening to one of these chosen few talk about technology. Mark, I hate to tell you, but I fall into the “Glaze” all the time when I listen to people discuss football stats. It’s not specific to technology at all. It’s what happens when someone whose passionate about a subject discusses it with someone who is not passionate or even slightly interested in the subject. Unfortunately, technology and the risks associated with an increasingly connected world aren’t something we can just ignore and let Professor X’s gang of undercover whitehats solve for us. If half the people who had been infected with the Conficker worm had had a little more understanding of why immediately installing security patches on their PCs is important, the ability of Conficker to spread would have been significantly limited. We as a society have a lot of ground to make up when it comes to educating people on the technology they rely on every day. Something as simple as registering domain names so someone else can’t use them shouldn’t be compared to a superpower.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;All in all, I had mixed reactions to &lt;i&gt;The Worm&lt;/i&gt;. The topic was interesting of course and spurred me into my own research on Conficker, but the author clearly was torn as to who his target audience was for this book. His efforts to dramatize these events and “connect” with a general audience failed to appeal to me and glazed over information that would have added a lot more depth to the story.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>We Are Anonymous - Inside the Hacker World of LulzSec, Anonymous, and the Global Cyber Insurgency</title>
+   <link href="http://www.laurapickens.net/books/2017-01-22-weareanon/"/>
+   <updated>2017-01-22T00:00:00-05:00</updated>
+   <id>http://www.laurapickens.net/books/weareanon</id>
+   <content type="html">&lt;p&gt;&lt;i&gt;We Are Anonymous&lt;/i&gt; is a compelling and entertaining read. While light on technical details and rife with dubious sources (Olson bases a lot of the embellishments in her narrative on interviews with “members” of Anonymous who arguably have been known to spin a tale or two), &lt;i&gt;We Are Anonymous&lt;/i&gt; excels most when offering insight into the people and motives that drive the underbelly of the internet. My primary interest in reading this book was to get a concise overview of how the Anonymous movement evolved and what specific attacks have been attributed to them. In the next section or two I will summarize the evolution of the Anonymous movement based on this book and then take a moment to review my key takeaways from the book itself.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2&gt;The Beginning of a Movement&lt;/h2&gt;
+&lt;p&gt;Anonymous found its beginnings on the 4chan image board. 4chan is the English spinoff of the popular Japanese image board 2chan. Initially used as a way for fans to discuss manga and anime, 4chan quickly grew in popularity and attracted users of varying interests. A key element to 4chan’s success is the anonymity it provides its users. No accounts are required to post on a board. You can type in a nickname or simply leave the name field blank and your post will be submitted with the handle “Anonymous”. 4chan has contributed significantly to internet subculture since it first launched in 2003, coining several internet memes such as lolcats, rickrolling and pedobear. It has also been used as a call to arms to perform pranks as well as other more nefarious activities such as cyberbullying, violence and pornography.&lt;/p&gt;
+
+&lt;p&gt;One of 4chan’s most popular boards is the Random or “/b/” board. The content on /b/ is completely unpredictable, from jokes to porn to violent videos, anything could appear on this board. /b/ was also where users would post calls to arms to try and influence the board’s tens of thousands of regular followers to join a protest or perform a prank. One of the first successful “raids” performed by 4chan users was on Habbo Hotel, a popular online game where users could wander around a virtual hotel with avatars and chat in real-time. In 2006, a poster on /b/ encouraged 4chan to flood the game with avatars in suits with afros and block off the popular pool area in the virtual hotel. The raid was such a success it spewed the popular “pool’s closed” meme. Successful raids such as this helped users feel more connected. References to Anonymous as a single group or hive mind, as well as the phrase “We are Legion”, began to grow in use and popularity on the board.&lt;/p&gt;
+
+&lt;p&gt;Eventually, the organizers of raids moved out of 4chan’s /b/ board and into IRC (Internet Relay Chat), a real-time chat system that also allowed users to join and post anonymously. Unlike 4chan, though, users on an IRC network could join separate chat rooms, or channels, where conversations are focused on specific topics. Not wanting to lose touch with the 4chan horde, 4chan continued to be used to advertise IRC channels where raids were being planned and organized.&lt;/p&gt;
+
+&lt;p&gt;In 2007, Fox News became the first media outlet to report on Anonymous. They did a piece on several of the raids that had occurred on /b/ and referred to Anonymous as a group of “hackers on steroids” and an “Internet Hate Machine”. This over dramatization of Anonymous, which according to Olson is mostly made up of “bored millennials” (insert eye roll at the overused millenials trope) and maybe a handful of hackers with real technical skills, would become a theme when the media reported on Anonymous activities.&lt;/p&gt;
+
+&lt;p&gt;In 2008, Anonymous aimed its sights on the Church of Scientology, managing to pull together hundreds of 4chan users to DDOS the church’s site. The attack was so successful, making a significant splash in the media, that thousands more were drawn to Anonymous’s “cause”. The group began their own YouTube channel reporting on Anonymous activities while wearing the Guy Fawkes mask from the 2006 movie &lt;i&gt;V for Vendetta&lt;/i&gt; which was quickly becoming a symbol for the more revolutionary side of Anonymous. Things escalated over the next few months, ending with Anonymous organizing public demonstrations outside various scientology sites around the world, establishing Anonymous as a very real and influential organization. The attacks and demonstrations against the Church of Scientology faded out when Anonymous supporters eventually lost interest and the Church of Scientology learned to stop “feeding the trolls”.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Anonymous and Lulzsec&lt;/h2&gt;
+&lt;p&gt;Anonymous, in the early years, was highly dependent on mob mentality. In order to accomplish something big, at least before the time of botnets, you had to have significant momentum and buy-in behind your cause. The new, more revolutionary direction Anonymous was heading in did not sit well with some of the original contributors to raids. They argued that actions done by Anonymous should be for the “lulz” or rather for the joy of laughing at someone else’s pain/humiliation. Anonymous shouldn’t be performing protests for the greater good. 2009 thus saw what Olson calls a civil war between the “moralfags” and the “trolls” in Anonymous.&lt;/p&gt;
+
+&lt;p&gt;It wasn’t until 2010 that Anonymous found a new cause to unite behind: censorship. A group of hackers equipped with botnets managed to get the old Anonymous group excited about what they called “Operation Payback”. They performed DDOS attacks against several copyright companies that were trying to shutdown bittorrent sites like The Pirate Bay. With new momentum and the support of a hacker or two with control over large botnets, the new Anonymous leadership performed more DDOS attacks against PayPal, Visa and Mastercard sites later that year. This time their cause was in support of WikiLeaks which these commerce sites had started blocking contributions to.&lt;/p&gt;
+
+&lt;p&gt;By the end of 2010, Anonymous had splintered into various operations, some targeting Middle Eastern regimes where democratic uprisings were taking place. Another subgroup of Anonymous had begun targeting an IT security group, HBGary Federal, which had publicly claimed to have uncovered the “real” Anonymous members. In retaliation, Anonymous hacked into HBGary Federal email accounts and published tens of thousands of emails on the company’s sensitive dealings, in addition to taking over their Twitter account and DDOS’ing their website.&lt;/p&gt;
+
+&lt;p&gt;With the dramatic takedown of HBGary Federal, Anonymous had gained some real momentum and was fully embracing their fame. They next performed a live hack of the Westboro Baptist website and then proceeded to DDOS Sony, taking down the PlayStation Network (and angering many Anonymous supporters) after Sony decided to sue a hacker. Anonymous then opened a AnonLeaks site to post any data leaks their members uncovered while scanning the internet for vulnerabilities and exploiting them. One of the first leaks they posted was a set of emails from the Bank of America.&lt;/p&gt;
+
+&lt;p&gt;Around this time in 2011, members of Anonymous, allegedly those behind the HBGary Federal hack, broke off from Anonymous to start their own hacker group, Lulzsec, which was focused on hacking anyone anywhere for the “lulz”. Lulzsec then hacked Fox, the PBS News Hour and Sony Pictures, leaking sensitive information from each organization and taking credit for the hack on Twitter. The Lulzsec attacks continued to escalate, leading to the defacement of an FBI affiliate website and then eventually the CIA website.&lt;/p&gt;
+
+&lt;p&gt;The Lulzsec group then published an Anti-Security (or Antisec) press release and claimed their next attacks would focus on government agencies. They finished their Antisec campaign by publishing names and home addresses of Arizona police officers. After this Lulzsec disbanded, but by the end of 2011 all primary members of Lulzsec allegedly had been arrested due to inside information provided to the FBI from within Anonymous/Lulzsec.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Olson humanizes her story by following several characters (i.e. people she interviewed) through their interactions with Anonymous. Some are bored adolescents who got caught up in the sense of community and joined in on raids briefly before returning to their normal lives. Others are avid users of the 4chan forum, desensitized to violence and sex, and spending their days prowling the internet for victims to cyberbully. There are experts on social engineering who can get people on social media to reveal personal information that can be further exploited for maximum “lulz”. Others joined Anonymous for hacktivism, wanting to play the part of vigilante and be the judge, jury and executioner of those the system failed to punish. Still others have the technical skills to cause serious damage and are looking for an excuse to use them.&lt;/p&gt;
+
+&lt;p&gt;Regardless of who got pulled into Anonymous and how, though, it is clear that the power of anonymity and the disassociation from real life and consequences that comes with use of the internet can mobilize people in amazing and terrifying ways. This book portrays Anonymous as having haphazardly evolved out of internet subculture and suffering constantly from an identity crisis. It tears itself apart and reforms under new leadership and causes frequently. It can be argued that the real teeth behind Anonymous isn’t the horde, but the handful of hackers that are attracted to Anonymous’s latest cause.&lt;/p&gt;
+
+&lt;p&gt;Overall, &lt;i&gt;We Are Anonymous&lt;/i&gt;’s writing and source material is a bit of a mess, but the story still does a decent job of pulling the reader into the world of Anonymous and there are plenty of lessons to be learned from it. If anything, anyone who is convinced they don’t need to worry about their own personal online security or that of their company’s should read this book. It does a brilliant job of demonstrating how arbitrary cyberattacks can be. Anonymous certainly has left a long trail of damage in its wake.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Ghost in the Wire</title>
+   <link href="http://www.laurapickens.net/books/2017-03-20-ghostinwires/"/>
+   <updated>2017-03-20T00:00:00-04:00</updated>
+   <id>http://www.laurapickens.net/books/ghostinwires</id>
+   <content type="html">&lt;p&gt;A crime thriller, blast to the technical past and deep education on the woes of social engineering, &lt;i&gt;Ghost in the Wires&lt;/i&gt; proved to be a fantastic and delightful read.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+
+</feed>

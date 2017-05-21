@@ -27,10 +27,10 @@ quote-author: Google Chromium Projects
             <h3>Around the Web</h3>
             <ul class="list-inline">
             	<li>
-                    <a href="https://twitter.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                    <a href="//twitter.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
                 </li>
                 <li>
-                    <a href="https://github.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
+                    <a href="//github.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
                 </li>
                 <!--<li>
                     <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>

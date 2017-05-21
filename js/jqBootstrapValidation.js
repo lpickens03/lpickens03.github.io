@@ -3,9 +3,9 @@
  *
  * v1.3.6
  *
- * License: MIT <http://opensource.org/licenses/mit-license.php> - see LICENSE file
+ * License: MIT <//opensource.org/licenses/mit-license.php> - see LICENSE file
  *
- * http://ReactiveRaven.github.com/jqBootstrapValidation/
+ * //ReactiveRaven.github.com/jqBootstrapValidation/
  */
 
 (function( $ ){
@@ -879,8 +879,8 @@
   /**
    * Thanks to Jason Bunting via StackOverflow.com
    *
-   * http://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string#answer-359910
-   * Short link: http://tinyurl.com/executeFunctionByName
+   * //stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string#answer-359910
+   * Short link: //tinyurl.com/executeFunctionByName
   **/
   function executeFunctionByName(functionName, context /*, args*/) {
     var args = Array.prototype.slice.call(arguments).splice(2);

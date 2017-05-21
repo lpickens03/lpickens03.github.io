@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Laura Pickens</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?">
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/css/freelancer.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="/public/css/poole.css">-->
+    <!--<link rel="stylesheet" href="/public/css/syntax.css">-->
+    <link href="/css/post.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Cormorant:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+  <body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Laura Pickens</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                     <li class="hidden">
+                        <a href="/"></a>
+                    </li>
+                    
+                    
+                      
+                        
+                      
+                    
+                      
+                        
+                      
+                    
+                      
+                        
+                        <li class="page-scroll">
+                          <a class="" href="/about/">About</a>
+                          </li>
+                        
+                      
+                    
+                      
+                        
+                      
+                    
+                      
+                        
+                        <li class="page-scroll">
+                          <a class="" href="/archive/">Archive</a>
+                          </li>
+                        
+                      
+                    
+                      
+                    
+                      
+                        
+                        <li class="page-scroll">
+                          <a class="" href="/bookshelf/">Bookshelf</a>
+                          </li>
+                        
+                      
+                    
+                      
+                        
+                        <li class="page-scroll">
+                          <a class="" href="/contactme/">Contact Me</a>
+                          </li>
+                        
+                      
+                    
+                      
+                        
+                      
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+      <div class="content">
+        <div class="container">
+  <div class="page">
+    <h1 class="post-title">Home Lab - Setting Up DHCP and DNS with pfSense</h1>
+    <div class="post-date"> 
+    <i class="fa fa-calendar" aria-hidden="true"></i> 
+    13 May 2017
+    </div>
+    <p>My ISP wireless router is set up in the main living area. My lab, on the other hand, is on the second floor. I’d like to be able to access the internet from my lab network without having to open up the walls to string Cat5s or lay an extra long Cat5 up the stairs, thru the hallway and under the door to the lab switch. Additionally, with the loss of my “air gap”, I want to put in place a security solution (or at least phase 1 of a solution) to mitigate the risk of exposing my lab directly to the internet.</p>
+
+<p>Thus I arrived at my solution: use a wireless bridge to connect my ISP wireless router to a firewall which will then be connected to my lab switch to provide internet to all. So my updated lab configuration will look something like this:</p>
+
+<p><img src="/images/posts/2017-05-14/lab_phase_1.png" alt="Lab Phase 1 Network Diagram" /></p>
+
+<p>The benefits of a firewall are three-fold: the ability to filter incoming and outgoing traffic, to hide my private lab network from the internet with NAT, and provide me a proper firewall to play with rather than just the VyOS VMs I’ve had to play with so far. I chose pfSense for the firewall simply because it’s an open source solution that comes highly recommended and it’s something I haven’t played with yet. I am trying to stick to open source solutions as much as possible with my lab to save some money (another reason I’m using VirtualBox as a hypervisor for my VMs rather than VMWare).</p>
+
+<p>Setting up the wireless bridge and pfSense was actually pretty straight forward. In the end what actually cost me the most time and headaches was getting my DNS configuration right. Since I couldn’t find a guide online that fit my particular needs, I’ve documented my setup here.</p>
+
+<p><br /></p>
+<h2>Setting Up DHCP</h2>
+<p>I was going back and forth for a while on whether I should use pfSense’s built in tools to set up DHCP and DNS on my network. In the end, I decided to give it a shot rather than set up a separate VM running a DHCP and DNS server. First, I had to make sure DHCP was disabled on both my wireless router and the new wireless bridge. Running two DHCP servers on the same network can and will cause IP conflicts and break the network unless they are properly configured to split the scope of IP addresses on the same subnet. For my small lab net, this is unnecessary.</p>
+
+<p>pfSense provides a pretty easy way to set this up. First, you go to Services -&gt; DHCP Server. The page for configuring DHCP for your LAN connection will be displayed. Here you will enable DHCP for the LAN interface and it will use the current IP settings for that LAN to decide what IP range it will offer hosts requesting IP addresses. If you scroll all the way to the bottom of this page, you can add static IP mappings so that hosts on the network will always receive the same IP address each time they boot up. All you need to do is hit “Add”, fill in the host’s MAC address and the desired IP address as well as it’s host name and you are good to go.</p>
+
+<p><br /></p>
+<h2>Setting Up DNS</h2>
+<p>This is where I ran into problems. DHCP conventiently instructs clients on where to look for DNS and by default points them all to the pfSense as the primary DNS server. pfSense has two DNS options: the DNS Forwarder and the DNS Resolver. DNS Forwarder just forwards all DNS requests to another DNS server with recursive caching capabilities using bind. DNS Resolver uses Unbound as a recursive caching DNS server with DNSSEC capabilities. By default, pfSense has the DNS Resolver configured on the LAN to handle DNS requests to the DNS servers configured by your ISP provider on the WAN connection. This works fine as is until you want to add internal DNS mappings to pfSense. Really what it came down to is that I needed an external DNS server to handle internet DNS requests and an internal DNS server to handle local DNS requests. I found a few guides that claimed pfSense could act as the internal DNS Server and forward internet requests to the external DNS Servers assigned by the ISP with DNS Resolver. However, the performance hit when loading web pages as well as the reduced reliability of DNS in general made this solution intolerable.</p>
+
+<p>In the end, I disabled both pfSense’s DNS services and checked the “Do not use the DNS Forwarder/DNS Resolver as a DNS server for the firewall” on pfSense’s general setup page. I then set up my own internal DNS server using bind9 on an Ubuntu 16.04 box on my network. This server I set up to forward requests to a set of external DNS servers. Since your ISP’s DNS servers aren’t always the fastest ones available I followed <a href="https://www.ceos3c.com/2016/11/29/improve-surfing-speed-with-namebench/">this guide</a> to use the namebench tool to find my top three DNS servers for internet DNS requests. Google’s Public DNS, Norton’s DNS, and RoadRunner’s DNS offered me the best performance.</p>
+
+<p>Following <a href="www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-private-network-dns-server-on-ubuntu-16-04">this tutorial</a>, I then set up bind9 on my Ubuntu box. The only addition I made to the steps outlined in the link (aside from changing the IP range and zone names to match what I had set up on the pfSense DHCP server) is updating the forwarder section under the options section in the named.conf.options file with the list of three external DNS servers found with namebench. I then updated the DHCP server on pfSense to set this Ubuntu box’s IP address as the DNS Server for all client’s requesting IP addresses.</p>
+
+<p>After renewing my DHCP leases on each of my DHCP clients, things were looking good except for the Ubuntu box running the DNS server. When I tried to ping anything from there I got the special IP address “127.0.53.53”. This indicates that I am getting DNS name collisions on my internal network (the 53 in the IP address implies port 53, the DNS server port). I had a fun time figuring out that Ubuntu’s Network Manager’s default settings automatically configures the dnsmasq program as a local forwarding nameserver listening on 127.0.1.1. Meaning I was actually running two DNS services on Ubuntu causing these collisions. I had to edit /etc/NetworkManager/NetworkManager.conf to comment out “dns=dnsmasq” and then restart the network-manager service to clean up the list of DNS servers it was generating in /etc/resolv.conf.</p>
+
+<p>With these last few changes made, I had a happy network with internet access and host names and IP addresses resolving correctly. I could now focus on actually configuring pfSense to be a firewall (it’s default rule is your typical “allow all” making it completely useless as a security measure without some time spent configuring it). That, of course, will be another post.</p>
+
+
+    <section class="signature">
+    <div class="image">
+      <img src="/images/avatar.png" class="img-responsive" alt="">
+    </div>
+    <div class="info">
+        <div class="title">
+        ABOUT <a href="/about">LAURA PICKENS</a>
+        </div>
+        <p>I spent my early days as a software engineer/system administrator before the cybersecurity field called to me. I am currently pursuing my MS in cybersecurity at John's Hopkins University. I work for a government contractor, performing vulnerability assessments on customer devices and IT infrastructure.</p>
+        <div>
+            <ul class="list-inline">
+
+              <li>
+                  <a href="https://twitter.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+              </li>
+              <li>
+                    <a href="https://github.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
+              </li>
+              <!--<li>
+                  <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+              </li>
+              <li>
+                  <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+              </li>-->
+              <li>
+                  <a href="/contactme" class="btn-social btn-outline"><i class="fa fa-fw fa-envelope"></i></a>
+              </li>
+          </ul>
+        </div>
+    </div>
+</section>
+
+    <div class="related">
+      <h2>Latest Posts</h2>
+      <ul class="related-posts">
+        
+          <li>
+            <h3>
+              <a href="/2017/01/08/cisco_type_7/">
+                Cisco Type 7 Encryption - What's in a hash?
+                <small><i class="fa fa-calendar" aria-hidden="true"></i> 08 Jan 2017</small>
+              </a>
+            </h3>
+          </li>
+        
+          <li>
+            <h3>
+              <a href="/2017/01/07/fun_w_cisco/">
+                Configuring Cisco Switches
+                <small><i class="fa fa-calendar" aria-hidden="true"></i> 07 Jan 2017</small>
+              </a>
+            </h3>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+      </div>
+
+    <!-- Footer -->
+<section class="footer">
+        <div class="text-center">
+            Copyright &copy; Laura Pickens 2017. All rights reserved. | <a href="\aboutsite.html">About this site</a>
+        </div>
+</section>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="/js/classie.js"></script>
+    <script src="/js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/js/freelancer.js"></script>
+
+  </body>
+</html>

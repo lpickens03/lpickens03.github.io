@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Laura Pickens</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?">
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/css/freelancer.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="/public/css/poole.css">-->
+    <!--<link rel="stylesheet" href="/public/css/syntax.css">-->
+    <link href="/css/post.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Cormorant:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+  <body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Laura Pickens</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                     <li class="hidden">
+                        <a href="/"></a>
+                    </li>
+                    
+                    
+                      
+                        
+                      
+                    
+                      
+                        
+                      
+                    
+                      
+                        
+                        <li class="page-scroll">
+                          <a class="" href="/about/">About</a>
+                          </li>
+                        
+                      
+                    
+                      
+                        
+                      
+                    
+                      
+                        
+                        <li class="page-scroll">
+                          <a class="" href="/archive/">Archive</a>
+                          </li>
+                        
+                      
+                    
+                      
+                    
+                      
+                        
+                        <li class="page-scroll">
+                          <a class="" href="/bookshelf/">Bookshelf</a>
+                          </li>
+                        
+                      
+                    
+                      
+                        
+                        <li class="page-scroll">
+                          <a class="" href="/contactme/">Contact Me</a>
+                          </li>
+                        
+                      
+                    
+                      
+                        
+                      
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+      <div class="content">
+        <div class="container">
+  <div class="page">
+    <h1 class="post-title">Configuring Cisco Switches</h1>
+    <div class="post-date"> 
+    <i class="fa fa-calendar" aria-hidden="true"></i> 
+    07 Jan 2017
+    </div>
+    <p>This weekend as part of my ongoing endeavor to get my home lab up and running, I tackled my first proper Cisco switch. Two Cisco Catalyst 3550 switches had been donated to my cause a few months back and I finally had the time to configure them today.</p>
+
+<p><img src="/images/posts/2017-01-07/cat3550s.bmp" alt="Cisco Catalyst 3550s" /></p>
+
+<p>I was starting from square one with familiarizing myself with the 3550s’ CLI. The switches had previously been used in a retail store of some sort so there was the added fun of restoring each switch to factory settings. At the end of the day, my goal was to break up the 48 FastEthernet ports into several vlans in prep for being connected up to my home lab network.</p>
+
+<p><br /></p>
+<h2>Connecting to the Switch</h2>
+<p>One of the first things I realized I needed was a console cable. I had no idea what IP address the switch was currently set to, so attaching an ethernet cable and attempting to telnet in would do me no good. Since my MacBook supports limited ports, I used this <a href="https://www.amazon.com/gp/product/B00I8CT8YG/ref=oh_aui_detailpage_o00_s00?ie=UTF8&amp;psc=1">USB to DB9 Cisco Console Cable</a> shown below.</p>
+
+<p><img src="/images/posts/2017-01-07/control_cable.bmp" alt="USB to DB9 Cisco Console Cable" /></p>
+
+<p>Once my Mac and the switch were connected, I just had to find the associated usb device under /dev and run the following command:</p>
+
+<p><code> screen /dev/tty.usbserial-AL00B2R5 9600 </code></p>
+
+<p>Note in the above the 9600 refers to the baud rate of the console port which can be found in the documentation for the switch.</p>
+
+<p><br /></p>
+<h2>Back to Factory Defaults</h2>
+<p>This successfully brought up a connection with the switch. Unfortunately, it became clear that there wasn’t much I could do without the password to allow me to edit the switch configuration. While I could attempt to recover the password, since I had no need to save the original switch config, I opted to restore it to factory defaults.</p>
+
+<p>To do this, I simply unplugged the switch, held down the mode button on the front and plugged it in again. The only snag I ran into here, which admittedly took me a while to figure out, is that I needed to unplug the console cable before I turned the switch back on from both the switch and the Mac. Otherwise, when I tried to connect to the switch with the console cable, I’d either get a busy signal or a blank screen. Once this was sorted though, I successfully brought up the switch prompt.</p>
+
+<p>I then followed Cisco’s instructions found <a href="http://www.cisco.com/image/gif/paws/12040/pswdrec_2900xl.pdf">here</a>.</p>
+
+<p>I used the following commands to initialize the flash file system:</p>
+
+<p><code>switch: flash_init</code></p>
+
+<p><code>switch: load_helper</code></p>
+
+<p>I then found the original configuration file and renamed it:</p>
+
+<p><code>switch: dir flash:</code></p>
+
+<p><code>switch: rename flash:config.text config.old</code></p>
+
+<p>Finally, I booted up the switch:</p>
+
+<p><code>switch: boot</code></p>
+
+<p><br /></p>
+<h2>Initial Configuration</h2>
+<p>Upon reboot, it enters initial configuration mode. I hit “<strong>n</strong>” to abort this and got the default Switch prompt. I then entered “<strong>en</strong>” to enter “enable” mode or what I think of as admin mode and voila! No password required and I am now able to set up the switch as I like. For the start, I followed <a href="https://www.youtube.com/watch?v=n_3CHv9bXdc">this tutorial</a> I found on youtube. The poster, <a href="https://www.youtube.com/channel/UCV0w1MlGfnPe9kR1jmBjGLQ"> Jorge Almazan</a>, included a good set of “recommended settings” which I will paraphrase in the following sections.</p>
+
+<p><br /></p>
+<h2>Configuring the Switch</h2>
+<p>Before diving into the details of the configuration, a quick overview of how the switch config if updated and saved.</p>
+
+<p>In order to configure the switch you need to enter configuration mode. To enter configuration mode you run the following command:</p>
+
+<p><code>configure terminal</code></p>
+
+<p>To exit configuration mode, you enter:</p>
+
+<p><code>end</code></p>
+
+<p>All of the updates you are making to the configuration are only saved into the switch’s running configuration. If you rebooted the switch at any point, it would load the starting configuration and any updates you made to it’s running configuration would be lost. Therefore, you should frequently save your changes as you go with this command run in “enable” mode:</p>
+
+<p><code>copy running-config startup-config</code></p>
+
+<p>The following sections assume you are entering and leaving configuration mode appropriately and saving your configuration frequently along the way.</p>
+
+<p><br /></p>
+<h2>Security</h2>
+<p>There are a number of items you need to configure initially. First and foremost, are the logins and passwords. The first password you want to set is for “enable” mode, so basically your root password. You set this as follows:</p>
+
+<p><code>enable secret &lt;your password&gt;</code></p>
+
+<p>You also want to set a password on your switch’s console so that whenever someone logs into the switch they are prompted for a password. To configure the console’s settings you enter:</p>
+
+<p><code>line console 0</code></p>
+
+<p>Once run, the following commands you run are applied only to the console. Here we want to set the console’s password, require users to login and set a timeout period to automatically log the user out after a number of minutes and/or seconds.</p>
+
+<p><code>password &lt;your password&gt;</code></p>
+
+<p><code>login</code></p>
+
+<p><code>exec-timeout 30 0</code></p>
+
+<p>While inside the console’s configuration, there are also some additional settings you can make to improve your interface with the console. One I highly recommend prevents the command line from being split in two by log messages:</p>
+
+<p><code>logging synchronous</code></p>
+
+<p>To leave the console configuration mode, you run:</p>
+
+<p><code>exit</code></p>
+
+<p>As the line name implies, this password is only for the console reached via the console cable we are currently using. Normally, once the switch is configured, you’d be using either <strong>telnet</strong> or, preferably from a security standpoint, <strong>ssh</strong> to access the switch remotely over the network. The 3550s allow you to set access controls for remote users with virtual terminal lines, or “vty”. My 3550s support up to 16 simultaneous connections so the command to enter the vty configuration mode for all connections would be</p>
+
+<p><code>line vty 0 15</code></p>
+
+<p>With this command, you are now in vty’s configuration. All the settings applied to the console’s configuration should also be applied here.</p>
+
+<p>Unfortunately, the default settings on the switch store these passwords in plain text. If you run</p>
+
+<p><code>show running-config</code></p>
+
+<p>in “enable mode”, you will see the passwords crystal clear listed in the configuration. To encrypt the passwords where they are stored, you will want to run</p>
+
+<p><code>service password encryption</code></p>
+
+<p>Now if you check the running config, a hash of the password is shown to mask it from prying eyes. Unfortunately, the hashing functions that these switches use are not strong and with minimal effort the passwords can be derived from the hash. I take a deeper look into the Catalyst’s weak hashing functions in <a href="/2017/01/08/cisco_type_7/">this post</a>.</p>
+
+<p><br /></p>
+<h2>Miscellaneous Settings</h2>
+<p>To set the login banner:</p>
+
+<p><code>banner motd [</code></p>
+
+<p>To set the hostname of the switch:</p>
+
+<p><code>hostname &lt;your switch's name&gt;</code></p>
+
+<p><br /></p>
+<h2>VLANs</h2>
+<p>The default vlan used by all of the switch’s ports is vlan 1. I need to break the switch up into multiple vlans to support my network’s segregation.</p>
+
+<p>First I need to create the new vlans:</p>
+
+<p><code>vlan &lt;vlan #&gt;</code></p>
+
+<p><code>name &lt;name of vlan (for your reference)&gt;</code></p>
+
+<p><code>exit</code></p>
+
+<p>I then need to assign each port to a vlan. I could do this for each port individually, but, fortunately, the 3550s allow you to assign a configure a range of interfaces at once. In the below commands x represents the first ethernet port in the range and y represents the last port. You can find the port numbers on the physical ports or get a list with the “<strong>show ip interface brief</strong>” command.</p>
+
+<p><code>interface range fastethernet 0/x – y</code></p>
+
+<p><code>switchport mode access</code></p>
+
+<p><code>switchport access vlan &lt;vlan #&gt;</code></p>
+
+<p><code>exit</code></p>
+
+<p>To set an IP address range to your vlan, you have to add interfaces for each of your vlans. Once you create the interface, you then add your ip address of choice and the subnet mask to dictate the range of ip addresses that will be on that vlan.</p>
+
+<p><code>interface vlan &lt;vlan #&gt;</code></p>
+
+<p><code>ip address 10.0.0.1 255.255.255.0</code></p>
+
+<p>With the ip address set for the vlan, you can connect a device to one of the ports, set the device’s IP address within that IP address range and then ping the switch on the IP address you set for the vlan that port is using.</p>
+
+<p>All of this is just the tip of the iceberg as far as switch configuration goes and fully integrating these switches into my lab’s network. I look forward to posting additional updates as I learn more about these switches and how best to use them.</p>
+
+
+    <section class="signature">
+    <div class="image">
+      <img src="/images/avatar.png" class="img-responsive" alt="">
+    </div>
+    <div class="info">
+        <div class="title">
+        ABOUT <a href="/about">LAURA PICKENS</a>
+        </div>
+        <p>I spent my early days as a software engineer/system administrator before the cybersecurity field called to me. I am currently pursuing my MS in cybersecurity at John's Hopkins University. I work for a government contractor, performing vulnerability assessments on customer devices and IT infrastructure.</p>
+        <div>
+            <ul class="list-inline">
+
+              <li>
+                  <a href="https://twitter.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+              </li>
+              <li>
+                    <a href="https://github.com/pickl09" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
+              </li>
+              <!--<li>
+                  <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+              </li>
+              <li>
+                  <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+              </li>-->
+              <li>
+                  <a href="/contactme" class="btn-social btn-outline"><i class="fa fa-fw fa-envelope"></i></a>
+              </li>
+          </ul>
+        </div>
+    </div>
+</section>
+
+    <div class="related">
+      <h2>Latest Posts</h2>
+      <ul class="related-posts">
+        
+          <li>
+            <h3>
+              <a href="/2017/05/13/lab_pfsense_dns/">
+                Home Lab - Setting Up DHCP and DNS with pfSense
+                <small><i class="fa fa-calendar" aria-hidden="true"></i> 13 May 2017</small>
+              </a>
+            </h3>
+          </li>
+        
+          <li>
+            <h3>
+              <a href="/2017/01/08/cisco_type_7/">
+                Cisco Type 7 Encryption - What's in a hash?
+                <small><i class="fa fa-calendar" aria-hidden="true"></i> 08 Jan 2017</small>
+              </a>
+            </h3>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+      </div>
+
+    <!-- Footer -->
+<section class="footer">
+        <div class="text-center">
+            Copyright &copy; Laura Pickens 2017. All rights reserved. | <a href="\aboutsite.html">About this site</a>
+        </div>
+</section>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="/js/classie.js"></script>
+    <script src="/js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/js/freelancer.js"></script>
+
+  </body>
+</html>

@@ -9,12 +9,13 @@ permalink:        pretty
 title:            Laura Pickens
 tagline:          'Information Security Enthusiast'
 description:      'This site is currently under construction. Please check back soon for updates.'
-url:              http://www.laurapickens.net
+url:              https://www.laurapickens.net
+enforce_ssl:      www.laurapickens.net
 baseurl:          /
 
 author:
   name:           'Laura Pickens'
-  url:            https://twitter.com/pickl09
+  url:            //twitter.com/pickl09
 
 paginate:         5
 
@@ -29,9 +30,9 @@ truncate_size:    70
 version:          2.0.0
 
 github:
-  repo:           https://github.com/poole/lanyon
+  repo:           //github.com/poole/lanyon
 
 # Social networking links used in footer. Update and remove as you like.
-  twitter:        https://twitter.com/pickl09
+  twitter:        //twitter.com/pickl09
   facebook:       
   linkedin:       

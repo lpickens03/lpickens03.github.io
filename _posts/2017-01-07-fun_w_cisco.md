@@ -11,7 +11,7 @@ I was starting from square one with familiarizing myself with the 3550s' CLI. Th
 
 <br/>
 <h2>Connecting to the Switch</h2>
-One of the first things I realized I needed was a console cable. I had no idea what IP address the switch was currently set to, so attaching an ethernet cable and attempting to telnet in would do me no good. Since my MacBook supports limited ports, I used this <a href="https://www.amazon.com/gp/product/B00I8CT8YG/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1">USB to DB9 Cisco Console Cable</a> shown below.
+One of the first things I realized I needed was a console cable. I had no idea what IP address the switch was currently set to, so attaching an ethernet cable and attempting to telnet in would do me no good. Since my MacBook supports limited ports, I used this <a href="//www.amazon.com/gp/product/B00I8CT8YG/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1">USB to DB9 Cisco Console Cable</a> shown below.
 
 <img src="/images/posts/2017-01-07/control_cable.bmp" alt="USB to DB9 Cisco Console Cable"/>
 
@@ -27,7 +27,7 @@ This successfully brought up a connection with the switch. Unfortunately, it bec
 
 To do this, I simply unplugged the switch, held down the mode button on the front and plugged it in again. The only snag I ran into here, which admittedly took me a while to figure out, is that I needed to unplug the console cable before I turned the switch back on from both the switch and the Mac. Otherwise, when I tried to connect to the switch with the console cable, I'd either get a busy signal or a blank screen. Once this was sorted though, I successfully brought up the switch prompt.
 
-I then followed Cisco's instructions found <a href="http://www.cisco.com/image/gif/paws/12040/pswdrec_2900xl.pdf">here</a>.
+I then followed Cisco's instructions found <a href="//www.cisco.com/image/gif/paws/12040/pswdrec_2900xl.pdf">here</a>.
 
 I used the following commands to initialize the flash file system:
 
@@ -47,7 +47,7 @@ Finally, I booted up the switch:
 
 <br/>
 <h2>Initial Configuration</h2>
-Upon reboot, it enters initial configuration mode. I hit "<strong>n</strong>" to abort this and got the default Switch prompt. I then entered "<strong>en</strong>" to enter "enable" mode or what I think of as admin mode and voila! No password required and I am now able to set up the switch as I like. For the start, I followed <a href="https://www.youtube.com/watch?v=n_3CHv9bXdc">this tutorial</a> I found on youtube. The poster, <a href="https://www.youtube.com/channel/UCV0w1MlGfnPe9kR1jmBjGLQ"> Jorge Almazan</a>, included a good set of "recommended settings" which I will paraphrase in the following sections.
+Upon reboot, it enters initial configuration mode. I hit "<strong>n</strong>" to abort this and got the default Switch prompt. I then entered "<strong>en</strong>" to enter "enable" mode or what I think of as admin mode and voila! No password required and I am now able to set up the switch as I like. For the start, I followed <a href="//www.youtube.com/watch?v=n_3CHv9bXdc">this tutorial</a> I found on youtube. The poster, <a href="//www.youtube.com/channel/UCV0w1MlGfnPe9kR1jmBjGLQ"> Jorge Almazan</a>, included a good set of "recommended settings" which I will paraphrase in the following sections.
 
 <br/>
 <h2>Configuring the Switch</h2>
