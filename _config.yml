@@ -9,8 +9,8 @@ permalink:        pretty
 title:            Laura Pickens
 tagline:          'Cybersecurity Analyst'
 description:      'Personal blog documenting research/projects of Laura.'
-url:              https://laurapickens.net
-enforce_ssl:      laurapickens.net
+url:              https://www.laurapickens.net
+enforce_ssl:      www.laurapickens.net
 baseurl:          /
 
 author:
