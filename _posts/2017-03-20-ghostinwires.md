@@ -1,5 +1,6 @@
 ---
 layout: book
+type: Book Review
 title: Ghost in the Wire
 author: Kevin Mitnick
 score: 5

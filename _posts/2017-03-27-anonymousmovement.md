@@ -1,19 +1,14 @@
 ---
-layout: book
-title: We Are Anonymous - Inside the Hacker World of LulzSec, Anonymous, and the Global Cyber Insurgency
-author: Parmy Olson
-score: 3.5
-cover: /images/books/weareanoncover.jpg
-published: May 14, 2013
-publisher: Back Bay Books
+layout: history 
+type: Research
+title: Origin of Anonymous
+group: 21st Century
+timeline: 2003 - 2011
 ---
 
-<i>We Are Anonymous</i> is a compelling and entertaining read. While light on technical details and rife with dubious sources (Olson bases a lot of the embellishments in her narrative on interviews with "members" of Anonymous who arguably have been known to spin a tale or two), <i>We Are Anonymous</i> excels most when offering insight into the people and motives that drive the underbelly of the internet. My primary interest in reading this book was to get a concise overview of how the Anonymous movement evolved and what specific attacks have been attributed to them. In the next section or two I will summarize the evolution of the Anonymous movement based on this book and then take a moment to review my key takeaways from the book itself.
-<br/><br/>
-
-<h2>The Beginning of a Movement</h2>
 Anonymous found its beginnings on the 4chan image board. 4chan is the English spinoff of the popular Japanese image board 2chan. Initially used as a way for fans to discuss manga and anime, 4chan quickly grew in popularity and attracted users of varying interests. A key element to 4chan's success is the anonymity it provides its users. No accounts are required to post on a board. You can type in a nickname or simply leave the name field blank and your post will be submitted with the handle "Anonymous". 4chan has contributed significantly to internet subculture since it first launched in 2003, coining several internet memes such as lolcats, rickrolling and pedobear. It has also been used as a call to arms to perform pranks as well as other more nefarious activities such as cyberbullying, violence and pornography. 
 
+<h2>The Beginning of a Movement</h2>
 One of 4chan's most popular boards is the Random or "/b/" board. The content on /b/ is completely unpredictable, from jokes to porn to violent videos, anything could appear on this board. /b/ was also where users would post calls to arms to try and influence the board's tens of thousands of regular followers to join a protest or perform a prank. One of the first successful "raids" performed by 4chan users was on Habbo Hotel, a popular online game where users could wander around a virtual hotel with avatars and chat in real-time. In 2006, a poster on /b/ encouraged 4chan to flood the game with avatars in suits with afros and block off the popular pool area in the virtual hotel. The raid was such a success it spewed the popular "pool's closed" meme. Successful raids such as this helped users feel more connected. References to Anonymous as a single group or hive mind, as well as the phrase "We are Legion", began to grow in use and popularity on the board.
 
 Eventually, the organizers of raids moved out of 4chan's /b/ board and into IRC (Internet Relay Chat), a real-time chat system that also allowed users to join and post anonymously. Unlike 4chan, though, users on an IRC network could join separate chat rooms, or channels, where conversations are focused on specific topics. Not wanting to lose touch with the 4chan horde, 4chan continued to be used to advertise IRC channels where raids were being planned and organized. 
@@ -35,14 +30,10 @@ With the dramatic takedown of HBGary Federal, Anonymous had gained some real mom
 Around this time in 2011, members of Anonymous, allegedly those behind the HBGary Federal hack, broke off from Anonymous to start their own hacker group, Lulzsec, which was focused on hacking anyone anywhere for the "lulz". Lulzsec then hacked Fox, the PBS News Hour and Sony Pictures, leaking sensitive information from each organization and taking credit for the hack on Twitter. The Lulzsec attacks continued to escalate, leading to the defacement of an FBI affiliate website and then eventually the CIA website. 
 
 The Lulzsec group then published an Anti-Security (or Antisec) press release and claimed their next attacks would focus on government agencies. They finished their Antisec campaign by publishing names and home addresses of Arizona police officers. After this Lulzsec disbanded, but by the end of 2011 all primary members of Lulzsec allegedly had been arrested due to inside information provided to the FBI from within Anonymous/Lulzsec.
-<br/><br/>
 
-<h2>Conclusion</h2>
-Olson humanizes her story by following several characters (i.e. people she interviewed) through their interactions with Anonymous. Some are bored adolescents who got caught up in the sense of community and joined in on raids briefly before returning to their normal lives. Others are avid users of the 4chan forum, desensitized to violence and sex, and spending their days prowling the internet for victims to cyberbully. There are experts on social engineering who can get people on social media to reveal personal information that can be further exploited for maximum "lulz". Others joined Anonymous for hacktivism, wanting to play the part of vigilante and be the judge, jury and executioner of those the system failed to punish. Still others have the technical skills to cause serious damage and are looking for an excuse to use them.
+<h2>References</h2>
+<a href="/2017/01/22/weareanon/"><i>We Are Anonymous</i>, Parmy Olson, 2013</a>
 
-Regardless of who got pulled into Anonymous and how, though, it is clear that the power of anonymity and the disassociation from real life and consequences that comes with use of the internet can mobilize people in amazing and terrifying ways. This book portrays Anonymous as having haphazardly evolved out of internet subculture and suffering constantly from an identity crisis. It tears itself apart and reforms under new leadership and causes frequently. It can be argued that the real teeth behind Anonymous isn’t the horde, but the handful of hackers that are attracted to Anonymous’s latest cause. 
-
-Overall, <i>We Are Anonymous</i>’s writing and source material is a bit of a mess, but the story still does a decent job of pulling the reader into the world of Anonymous and there are plenty of lessons to be learned from it. If anything, anyone who is convinced they don’t need to worry about their own personal online security or that of their company’s should read this book. It does a brilliant job of demonstrating how arbitrary cyberattacks can be. Anonymous certainly has left a long trail of damage in its wake.
 
 
 

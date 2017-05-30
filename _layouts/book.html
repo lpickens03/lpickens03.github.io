@@ -3,11 +3,6 @@ layout: default
 ---
 <div class="container">
   <div class="page">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <div class="post-date"> 
-    <i class="fa fa-calendar" aria-hidden="true"></i> 
-    {{ page.date | date_to_string }}
-    </div>
     <div class="bookleftalign text-center">
       <img class="bookcover" src="{{page.cover}}" alt="{{page.title}}" />
       <div class="aboutbook">
@@ -19,6 +14,11 @@ layout: default
         <h3>Publisher</h3>
         <p>{{ page.publisher }}</p>
       </div>
+    </div>
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-date"> 
+    <i class="fa fa-calendar" aria-hidden="true"></i> 
+    {{ page.date | date_to_string }} | {{ page.type }}
     </div>
     {{ content }}
     {% include signature.html %}

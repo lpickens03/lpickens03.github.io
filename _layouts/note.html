@@ -14,9 +14,10 @@ layout: default
     <div class="related">
       <h2>Latest Posts</h2>
       <ul class="related-posts">
+        {% assign notes = (site.posts | where: "layout", "note" ) %}
         {% assign maxcount = 3 %}
         {% assign counter = 0 %}
-        {% for post in site.posts %}
+        {% for post in notes %}
           {% unless post.url == page.url %}
             {% if counter < maxcount %}
               <li>
@@ -35,7 +36,3 @@ layout: default
     </div>
   </div>
 </div>
-
-
-
-

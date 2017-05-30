@@ -1,10 +1,9 @@
 ---
-layout: page
+layout: form
 title: Contact Me
 quote: Security is not a product; it itself is a process. ... If you think technology can solve you security problems, then you don't understand the problems and you don't understand the technology. 
 quote-author: Bruce Schneier
 ---
-
 <form id="contactform" name="contactme" method="POST">
 	<div class="row control-group">
         <div class="form-group col-xs-12 floating-label-form-group controls">

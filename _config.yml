@@ -7,8 +7,8 @@ permalink:        pretty
 
 # Setup
 title:            Laura Pickens
-tagline:          'Information Security Enthusiast'
-description:      'This site is currently under construction. Please check back soon for updates.'
+tagline:          'Cybersecurity Analyst'
+description:      'Personal blog documenting research/projects of Laura.'
 url:              https://www.laurapickens.net
 enforce_ssl:      www.laurapickens.net
 baseurl:          /

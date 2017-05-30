@@ -3,7 +3,7 @@ layout: default
 ---
 <div class="container">
   <div class="page">
-    <h1 class="post-title">{{ page.title }}</h1>
+    <h1 class="post-title">{{page.timeline}}: {{ page.title }}</h1>
     <div class="post-date"> 
     <i class="fa fa-calendar" aria-hidden="true"></i> 
     {{ page.date | date_to_string }} | {{ page.type }}
@@ -14,9 +14,10 @@ layout: default
     <div class="related">
       <h2>Latest Posts</h2>
       <ul class="related-posts">
+        {% assign historyposts = (site.posts | where: "layout", "history" ) %}
         {% assign maxcount = 3 %}
         {% assign counter = 0 %}
-        {% for post in site.posts %}
+        {% for post in historyposts %}
           {% unless post.url == page.url %}
             {% if counter < maxcount %}
               <li>
@@ -35,7 +36,3 @@ layout: default
     </div>
   </div>
 </div>
-
-
-
-

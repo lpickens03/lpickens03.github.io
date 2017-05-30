@@ -1,5 +1,6 @@
 ---
-layout: post
+layout: note
+type: Notes
 title: Configuring Cisco Switches
 ---
 

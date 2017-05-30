@@ -8,5 +8,4 @@ published: January 21, 1998
 publisher: Simon & Schuster
 ---
 
-Coming soon!
-
+I cannot recommend this book highly enough.

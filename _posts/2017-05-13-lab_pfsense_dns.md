@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Home Lab - Setting Up DHCP and DNS with pfSense
+type: Home Lab Projects
+title: Setting Up DHCP and DNS with pfSense
 ---
 
 My ISP wireless router is set up in the main living area. My lab, on the other hand, is on the second floor. I'd like to be able to access the internet from my lab network without having to open up the walls to string Cat5s or lay an extra long Cat5 up the stairs, thru the hallway and under the door to the lab switch. Additionally, with the loss of my "air gap", I want to put in place a security solution (or at least phase 1 of a solution) to mitigate the risk of exposing my lab directly to the internet. 

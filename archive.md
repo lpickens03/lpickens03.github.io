@@ -18,7 +18,7 @@ quote-author: Antisthenes
 
 <table cellpadding="0" cellspacing="0" border="0"> 
 
-  <tr><td><a href="{{ post.url }}">{{ post.title }}</a></td>
+  <tr><td><a href="{{ post.url }}">{{post.type}}: {{ post.title }}</a></td>
   <td style = "text-align:right">{{post.date | date: "%-d %B"}}</td></tr>
 </table>
 {% endfor %}
