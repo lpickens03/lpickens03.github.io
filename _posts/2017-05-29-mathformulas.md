@@ -20,6 +20,6 @@ Examples:
 <li>-101 mod 7 = 4, where 101 = 7 x -15 + 4</li>
 </ul>
 
-Addition and Multiplication in Modular Arithmentic:<br/>
+<h3 style="font-size: 120%">Addition and Multiplication in Modular Arithmentic</h3>
 11 x 13 in modulo 16 is taking 11 x 13 = 143 and reducing by modulo 16. So 143 = 8 x 16 + 15 so 143 mod 16 = 15. A similar method is used for addition.
 
