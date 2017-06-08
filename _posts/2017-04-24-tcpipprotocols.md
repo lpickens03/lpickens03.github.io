@@ -4,9 +4,9 @@ type: Notes
 title: TCP/IP Networking Protocols
 ---
 
-I figured I'd create a central location to keep track of ports and protocols I encounter day-to-day. I plan on updating this page pretty regularly as I dive into and play with each protocol. The complete list of protocol assignments can be found at the <a href="//www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml">IANA website</a>.
+Networking is full of a host of acronyms that can make anyone go cross-eyed. This page is intended as a quick reference to help look up common networking concepts (most of these are at Layer 7, the application layer, but they rely on protocols at Layers 2 through 4 for transport).
 
-<h2>TCP/IP Protocols</h2>
+<h2>TCP/IP Protocols**</h2>
 <table>
   <tr style="font-weight: bold;"><td>Protocols</td><td>TCP/UDP</td><td>Port</td><td>Description</td></tr>
   <tr><td>FTP</td><td>TCP</td><td>20/21</td><td>File Transfer Protocol</td></tr>
@@ -27,8 +27,8 @@ I figured I'd create a central location to keep track of ports and protocols I e
   <tr><td>HTTPS</td><td>TCP</td><td>443</td><td>Hypertext Transfer Protocol over SSL/TLS</td></tr>
   <tr><td>LDAPS</td><td>TCP/UDP</td><td>636</td><td>Lightweight Directory Access Protocol over TLS/SSL</td></tr>
   <tr><td>FTPS</td><td>TCP</td><td>989/990</td><td>FTP over TLS/SSL</td></tr>
-  
 </table>
+<span style="font-size: 80%">**For a comprehensive list of protocol assignments check out the <a href="//www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml">IANA website</a>.</span>
 
 
 
