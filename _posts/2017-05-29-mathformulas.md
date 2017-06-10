@@ -24,6 +24,14 @@ Examples:
 11 x 13 in modulo 16 is taking 11 x 13 = 143 and reducing by modulo 16. So 143 = 8 x 16 + 15 so 143 mod 16 = 15. A similar method is used for addition.
 
 <br/>
+<h2>Binary Arithmetic</h2>
+See <a href="/2017/06/10/binarymath/">here</a>.
+
+<br/>
 <h2>Binomial Coefficient</h2>
 Denotes the number of ways of choosing a subset of $$k$$ objects from a set of $$n$$ objects:<br/>
 $$\binom{n}{k} = n!/(k!(n-k)!)$$
+
+<br/>
+<h2>Probability</h2>
+See <a href="/2017/06/10/probability/">here</a>.
