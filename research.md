@@ -7,9 +7,8 @@ quote-author: Antisthenes
 
 <h2>Timeline of Research Topics:</h2>
 
-
 {% assign historyposts = 
-	(site.posts | where: "layout" , "history" | reverse ) %}
+	(site.posts | where: "layout" , "history" | sort: 'timeline' | reverse) %}
 
 {% for post in historyposts %}
 
