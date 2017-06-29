@@ -79,3 +79,11 @@ One other interesting characteristic of XOR is that it is reversible. So if you 
 Bit-level XOR produces exactly the same results as doing addition mod 2:<br/>
 $$( a + b )$$ mod $$2 = a \oplus b$$
 </span>
+
+<h3 style="font-size: 120%">Arithmetic Shift</h3>
+A left or right shift is a bitwise operation that shifts all the bits in a binary number over however many positions. In order to preserve signedness, the leftmost bit (the sign bit) is replicated rather than being filled with 0's when doing a left shift. A right shift will just fill in 0's.
+
+Shifting left by n bits on a signed or unsigned binary number has the effect of multiplying it by $2^n$. Shifting right by n bits on a two's complement signed binary number has the effect of dividing it by $2^n$, but it always rounds down (towards negative infinity). 
+
+<h3 style="font-size: 120%">Bitwise Rotation</h3>
+A bitwise rotation, also known as a circular shift, either moves the first bit to the last position, shifting all other bits up a position or vice versa. It does not preserve the signedness of the binary number.
