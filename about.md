@@ -52,7 +52,7 @@ This blog is a way for me to document my research, projects and experiences for 
 <h2>About Me</h2>
 After spending about 6 years in software while moonlighting as a system administrator, I discovered the wonderful world of information security and my path was set. I currently work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth vulnerability testing of customer systems.
 
-I tend to waste whatever free time I have working on lab projects or reading whatever the book of the day is. In between all that awesomeness, I try and sneak in a glass of wine from time to time.
+I tend to waste whatever free time I have working on lab projects, playing video games, or reading books. In between all that awesomeness, I sneak in the occasional glass of wine.
 <br/> 
 
 
