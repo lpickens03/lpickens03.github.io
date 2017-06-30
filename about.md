@@ -16,7 +16,7 @@ quote-author: Google Chromium Projects
         <!--</div>
     	<div class="footer-col col-md-4">-->
             <h3>Education</h3>
-            <p>MS Cybersecurity</p>
+            <p>MS Cybersecurity (2018)</p>
             <p>BA Computer Science</p>
         <!--</div>
         <div class="footer-col col-md-4">-->
