@@ -30,18 +30,18 @@ title: Home
     </div>
     <div class="pagination">
       {% if paginator.next_page %}
-        <a class="pagination-item older" href="/page{{paginator.next_page}}">Older</a>
+        <a class="pagination-item older" href="/page{{paginator.next_page}}">&lt;&lt;</a>
       {% else %}
-        <span class="pagination-item older">&lt;&lt;</span>
+        <span class="pagination-item older">--</span>
       {% endif %}
       {% if paginator.previous_page %}
         {% if paginator.page == 2 %}
-          <a class="pagination-item newer" href="/">Newer</a>
+          <a class="pagination-item newer" href="/">&gt;&gt;</a>
         {% else %}
-          <a class="pagination-item newer" href="/page{{paginator.previous_page}}">Newer</a>
-        {% endif %}
+          <a class="pagination-item newer" href="/page{{paginator.previous_page}}">&gt;&gt;</a>
+       {% endif %}
       {% else %}
-        <span class="pagination-item newer">&gt;&gt;</span>
+        <span class="pagination-item newer">--</span>
       {% endif %}
     </div>
   </div>
