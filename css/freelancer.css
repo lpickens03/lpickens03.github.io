@@ -294,6 +294,7 @@ Updates made for Dropdown menu
     background-color: #000000;
     color: #ffffff;
     text-decoration: none;
+    border: 0px;
 }
 
 .dropdown-menu > li > a {
