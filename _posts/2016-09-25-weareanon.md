@@ -1,6 +1,8 @@
 ---
 layout: book
 type: Book Review
+category: Book Reviews
+tags: [books, history, hackers]
 title: We Are Anonymous - Inside the Hacker World of LulzSec, Anonymous, and the Global Cyber Insurgency
 author: Parmy Olson
 score: 3.5

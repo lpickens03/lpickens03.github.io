@@ -1,6 +1,8 @@
 ---
 layout: note
-type: Notes
+type: Note
+category: Notes
+tags: [math]
 title: Common Math Formulas
 ---
 

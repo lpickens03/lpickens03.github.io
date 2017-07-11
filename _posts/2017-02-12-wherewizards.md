@@ -1,6 +1,8 @@
 ---
 layout: book
 type: Book Review
+category: Book Reviews
+tags: [books, history, internet]
 title: Where Wizards Stay Up Late - The Origins Of The Internet
 author: Katie Hafner, Matthew Lyon
 score: 5

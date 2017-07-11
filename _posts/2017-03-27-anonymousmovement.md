@@ -1,6 +1,8 @@
 ---
 layout: history 
 type: Research
+category: Research
+tags: [history, hackers]
 title: Origin of Anonymous
 group: 21st Century
 timeline: 2003 - 2011

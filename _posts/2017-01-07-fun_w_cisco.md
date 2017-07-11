@@ -1,6 +1,8 @@
 ---
 layout: note
-type: Notes
+type: Note
+category: Notes
+tags: [lab, hardware, switches]
 title: Configuring Cisco Switches
 ---
 

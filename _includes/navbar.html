@@ -21,8 +21,27 @@
                     <ul class="nav navbar-nav navbar-right">
                      <li class="hidden">
                         <a href="{{ site.baseurl }}"></a>
-                    </li>
-                    {% assign pages_list = site.pages | sort:"url" %}
+                     </li >
+                     {% for nav in site.data.nav %}
+                      {% if nav.subcategories != null %}
+                        <li class="nav-btn"> <button type="button" data-toggle="dropdown" data-hover="dropdown"> {{ nav.title }} <span class="caret"></span></button>
+                          <ul class="dropdown-menu">
+                          {% for subcategory in nav.subcategories %}
+                            <li class="page-scroll"><a href="{{ site.url }}{{ subcategory.subhref }}">{{ subcategory.subtitle }}</a></li>
+                          {% endfor %}
+                          </ul>
+                        </li>
+                      {% elsif nav.title == page.title %}
+                         <li class="active">
+                           <a href="{{ nav.url }}">{{ nav.title }}</a>
+                         </li>
+                      {% else %} 
+                        <li class="page-scroll">
+                          <a href="{{ site.url }}{{ nav.href }}">{{ nav.title }}</a>
+                        </li>
+                     {% endif %}
+                    {% endfor %}
+                   <!--{% assign pages_list = site.pages | sort:"url" %}
                     {% for node in pages_list %}
                       {% if node.title != null %}
                         {% if node.layout == "page" %}
@@ -31,7 +50,7 @@
                           </li>
                         {% endif %}
                       {% endif %}
-                    {% endfor %}
+                    {% endfor %}-->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

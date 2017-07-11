@@ -1,6 +1,8 @@
 ---
 layout: history
 type: Research
+category: Research
+tags: [history, hardware]
 title: Birth of the Microchip
 group: 20th Century
 timeline: 1959 - 1965

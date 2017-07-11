@@ -1,6 +1,8 @@
 ---
 layout: book
 type: Book Review
+category: Book Reviews
+tags: [lab, virtual machines]
 title: Building Virtual Machine Labs
 author: Tony V. Robinson
 score: 5

@@ -1,7 +1,9 @@
 ---
 layout: book
 type: Book Review
-title: Ghost in the Wire
+title: Ghost in the Wires
+category: Book Reviews
+tags: [books, history, hackers]
 author: Kevin Mitnick
 score: 5
 cover: /images/books/ghostwirescover.png

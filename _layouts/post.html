@@ -6,7 +6,10 @@ layout: default
     <h1 class="post-title">{{ page.title }}</h1>
     <div class="post-date"> 
     <i class="fa fa-calendar" aria-hidden="true"></i> 
-    {{ page.date | date_to_string }} | {{ page.type }}
+    {{ page.date | date_to_string }} | {{ page.type }} | 
+    {% for tag in page.tags %}
+      <a class="btn-tag" href="/tag/#{{ tag | slugify }}"> <i class="fa fa-fw fa-tag"></i>{{ tag }} </a>
+    {% endfor %}
     </div>
     {{ content }}
     {% include signature.html %}

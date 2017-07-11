@@ -1,6 +1,8 @@
 ---
 layout: note
-type: Notes
+type: Note
+category: Notes
+tags: [networking, TCP/IP]
 title: TCP/IP Networking Protocols
 ---
 

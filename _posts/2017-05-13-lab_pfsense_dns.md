@@ -1,6 +1,8 @@
 ---
 layout: post
-type: Home Lab Projects
+type: Project
+category: Projects
+tags: [lab, firewall, DNS, DHCP]
 title: Setting Up DHCP and DNS with pfSense
 ---
 

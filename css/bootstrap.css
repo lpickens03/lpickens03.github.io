@@ -4410,7 +4410,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-nav > li {
     float: left;
   }
-  .navbar-nav > li > a {
+  .navbar-nav > li > a,
+  .navbar-nav > li > button {
     padding-top: 19.5px;
     padding-bottom: 19.5px;
   }

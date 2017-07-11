@@ -1,6 +1,8 @@
 ---
 layout: note
-type: Notes
+type: Note
+category: Notes
+tags: [math]
 title: Probability
 ---
 
@@ -9,7 +11,7 @@ Reviews of the mathematical model for determining the "chance" of an event occur
 <h2>Marginal Probability</h2>
 Marginal probability is the probability of an event ($P(x)$) occuring. In the most basic sense, the probability of an event $x$ occuring ($P(x)$) is equal to the number of ways the event $x$ can occur divided by the total number of possible outcomes of the experiment:<br/>
 
-$$P(X) = \frac{\#\;of\;ways\;event\;can\;occur}{\#\;of\;total\;possible\; outcomes}, $$
+$$P(x) = \frac{\#\;of\;ways\;event\;can\;occur}{\#\;of\;total\;possible\; outcomes}, $$
 
 So the probability of a coin flip resulting in heads is: $P(x) = \frac{1}{2}$. The total possible outcomes in this instance is the sample space $X = (heads,\;tails)$ which has a total of 2 possible outcomes.
 

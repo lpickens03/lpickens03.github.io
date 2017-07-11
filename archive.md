@@ -10,7 +10,7 @@ quote-author: Antisthenes
 {% capture currentyear %}{{ post.date | date: "%Y" }}{% endcapture %}
 {% if currentyear != year %}
 
-{{currentyear | strip_html}}
+<h2>{{currentyear | strip_html}}</h2>
 
 {% capture year %}{{ currentyear }}{% endcapture %}
 

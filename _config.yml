@@ -30,7 +30,7 @@ truncate_size:    70
 version:          2.0.0
 
 github:
-  repo:           //github.com/poole/lanyon
+  repo:           //github.com/pickl09
 
 # Social networking links used in footer. Update and remove as you like.
   twitter:        //twitter.com/pickl09
