@@ -33,7 +33,7 @@ Around this time in 2011, members of Anonymous, allegedly those behind the HBGar
 The Lulzsec group then published an Anti-Security (or Antisec) press release and claimed their next attacks would focus on government agencies. They finished their Antisec campaign by publishing names and home addresses of Arizona police officers. After this Lulzsec disbanded, but by the end of 2011 all primary members of Lulzsec allegedly had been arrested due to inside information provided to the FBI from within Anonymous/Lulzsec.
 
 <h2>References</h2>
-<a href="/2017/01/22/weareanon/"><i>We Are Anonymous</i>, Parmy Olson, 2013</a>
+<a href="/book%20reviews/2016/09/25/weareanon/"><i>We Are Anonymous</i>, Parmy Olson, 2013</a>
 
 
 

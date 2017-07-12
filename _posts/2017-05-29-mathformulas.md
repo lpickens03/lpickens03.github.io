@@ -27,7 +27,7 @@ Examples:
 
 <br/>
 <h2>Binary Arithmetic</h2>
-See <a href="/2017/06/10/binarymath/">here</a>.
+See <a href="/notes/2017/06/10/binarymath/">here</a>.
 
 <br/>
 <h2>Binomial Coefficient</h2>
@@ -36,4 +36,4 @@ $$\binom{n}{k} = n!/(k!(n-k)!)$$
 
 <br/>
 <h2>Probability</h2>
-See <a href="/2017/06/10/probability/">here</a>.
+See <a href="/notes/2017/06/10/probability/">here</a>.

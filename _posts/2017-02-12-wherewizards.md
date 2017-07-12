@@ -17,4 +17,4 @@ What struck me most about this book was how amazingly organic the Internet's evo
 
 This book was a joy to read and should be a staple on the shelf of anyone who works with technology. As more and more governments and organizations look towards regulation of the Internet to solve our security problems, it is important to keep in mind the spirit that got us to where we are today. 
 
-For those interested in a deeper look at the material covered in this book, I did a more thorough summarization <a href="/2017/06/01/arpanet/">here</a>.
+For those interested in a deeper look at the material covered in this book, I did a more thorough summarization <a href="/research/2017/06/01/arpanet/">here</a>.

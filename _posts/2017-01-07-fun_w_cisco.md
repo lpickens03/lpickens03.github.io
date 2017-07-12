@@ -110,7 +110,7 @@ in "enable mode", you will see the passwords crystal clear listed in the configu
 
 <code>service password encryption</code>
 
-Now if you check the running config, a hash of the password is shown to mask it from prying eyes. Unfortunately, the hashing functions that these switches use are not strong and with minimal effort the passwords can be derived from the hash. I take a deeper look into the Catalyst's weak hashing functions in <a href="/2017/01/08/cisco_type_7/">this post</a>.
+Now if you check the running config, a hash of the password is shown to mask it from prying eyes. Unfortunately, the hashing functions that these switches use are not strong and with minimal effort the passwords can be derived from the hash. I take a deeper look into the Catalyst's weak hashing functions in <a href="/projects/2017/01/08/cisco_type_7/">this post</a>.
 
 <br/>
 <h2>Miscellaneous Settings</h2>
