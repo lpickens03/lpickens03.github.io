@@ -18,6 +18,12 @@ quote-author: Google Chromium Projects
             <h3>Education</h3>
             <p>MS Cybersecurity (2018)</p>
             <p>BA Computer Science</p>
+            <h3>Certifications</h3>
+            <ul class="list-inline">
+                <li>
+                    <img class="cert-icon" src="/images/SecurityPlusLogoCertifiedCEWhite.png"/>
+                </li>
+            </ul>
         <!--</div>
         <div class="footer-col col-md-4">-->
             <h3>Contact Me</h3>
