@@ -144,6 +144,13 @@ img {
   max-width: 100%;
 }
 
+.img_caption {
+  width: 100%; 
+  text-align: center; 
+  padding-bottom: 10pt;
+  font-style: italic;
+}
+
 /* Tables */
 table {
   margin-bottom: 1rem;

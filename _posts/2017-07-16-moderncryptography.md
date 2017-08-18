@@ -2,7 +2,7 @@
 layout: book
 type: Book Review
 category: Book Reviews
-tags: [books, cryptology]
+tags: [books, cryptography]
 title: Modern Cryptography - Applied Mathematics for Encryption and Information Security 
 author: Chuck Easttom
 score: 4
