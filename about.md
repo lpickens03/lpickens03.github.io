@@ -11,7 +11,7 @@ quote-author: Google Chromium Projects
   <div class="aboutme">
     <div class="row">
     	<!--<div class="footer-col col-md-4">-->
-            <h3>Job Title</h3>
+            <h3>Title</h3>
             <p>Cybersecurity Analyst</p>
         <!--</div>
     	<div class="footer-col col-md-4">-->
@@ -56,7 +56,7 @@ This blog is a way for me to document my research, projects and experiences for 
 
 <br/>
 <h2>About Me</h2>
-After spending about 6 years in software while moonlighting as a system administrator, I discovered the wonderful world of information security and my path was set. I currently work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth vulnerability testing of customer systems.
+After spending about 6 years in software while moonlighting as a system administrator, I recently fell into information security and, well, my path was set. I currently work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth penetration testing of customer systems. I am also working towards my Master's in cybersecurity.
 
 I tend to waste whatever free time I have working on lab projects, playing video games, or reading books. In between all that awesomeness, I sneak in the occasional glass of wine.
 <br/> 
