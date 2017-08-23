@@ -1,7 +1,7 @@
 ---
-layout: note
-type: Note
-category: Notes
+layout: post
+type: Project
+category: Projects
 tags: [lab, hardware, switches]
 title: Configuring Cisco Switches
 ---
@@ -12,7 +12,6 @@ This weekend as part of my ongoing endeavor to get my home lab up and running, I
 
 I was starting from square one with familiarizing myself with the 3550s' CLI. The switches had previously been used in a retail store of some sort so there was the added fun of restoring each switch to factory settings. At the end of the day, my goal was to break up the 48 FastEthernet ports into several vlans in prep for being connected up to my home lab network.
 
-<br/>
 <h2>Connecting to the Switch</h2>
 One of the first things I realized I needed was a console cable. I had no idea what IP address the switch was currently set to, so attaching an ethernet cable and attempting to telnet in would do me no good. Since my MacBook supports limited ports, I used this <a href="//www.amazon.com/gp/product/B00I8CT8YG/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1">USB to DB9 Cisco Console Cable</a> shown below.
 
@@ -24,7 +23,6 @@ Once my Mac and the switch were connected, I just had to find the associated usb
 
 Note in the above the 9600 refers to the baud rate of the console port which can be found in the documentation for the switch.
 
-<br/>
 <h2>Back to Factory Defaults</h2>
 This successfully brought up a connection with the switch. Unfortunately, it became clear that there wasn't much I could do without the password to allow me to edit the switch configuration. While I could attempt to recover the password, since I had no need to save the original switch config, I opted to restore it to factory defaults.
 
@@ -48,11 +46,9 @@ Finally, I booted up the switch:
 
 <code>switch: boot</code>
 
-<br/>
 <h2>Initial Configuration</h2>
 Upon reboot, it enters initial configuration mode. I hit "<strong>n</strong>" to abort this and got the default Switch prompt. I then entered "<strong>en</strong>" to enter "enable" mode or what I think of as admin mode and voila! No password required and I am now able to set up the switch as I like. For the start, I followed <a href="//www.youtube.com/watch?v=n_3CHv9bXdc">this tutorial</a> I found on youtube. The poster, <a href="//www.youtube.com/channel/UCV0w1MlGfnPe9kR1jmBjGLQ"> Jorge Almazan</a>, included a good set of "recommended settings" which I will paraphrase in the following sections.
 
-<br/>
 <h2>Configuring the Switch</h2>
 Before diving into the details of the configuration, a quick overview of how the switch config if updated and saved. 
 
@@ -70,7 +66,6 @@ All of the updates you are making to the configuration are only saved into the s
 
 The following sections assume you are entering and leaving configuration mode appropriately and saving your configuration frequently along the way.
 
-<br/>
 <h2>Security</h2>
 There are a number of items you need to configure initially. First and foremost, are the logins and passwords. The first password you want to set is for "enable" mode, so basically your root password. You set this as follows:
 
@@ -112,7 +107,6 @@ in "enable mode", you will see the passwords crystal clear listed in the configu
 
 Now if you check the running config, a hash of the password is shown to mask it from prying eyes. Unfortunately, the hashing functions that these switches use are not strong and with minimal effort the passwords can be derived from the hash. I take a deeper look into the Catalyst's weak hashing functions in <a href="/projects/2017/01/08/cisco_type_7/">this post</a>.
 
-<br/>
 <h2>Miscellaneous Settings</h2>
 To set the login banner:
 
@@ -122,7 +116,6 @@ To set the hostname of the switch:
 
 <code>hostname &lt;your switch's name&gt;</code>
 
-<br/>
 <h2>VLANs</h2>
 The default vlan used by all of the switch's ports is vlan 1. I need to break the switch up into multiple vlans to support my network's segregation.
 
