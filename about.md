@@ -52,11 +52,10 @@ quote-author: Google Chromium Projects
    </div>
 </div>
 <h2>Mission Statement</h2>
-This blog is a way for me to document my research, projects and experiences for my own personal reference. While my primary focus will be on information security related topics, I may stray off course whenever the mood hits. 
+My personal mission is to learn, never stop learning, and share what I've learned each chance I get. This site is a way for me to not only document my learning pursuits but share the results, hopefully helping others with similar interests and career goals. The best part of information security is that there is always more to learn so my search for knowledge will never be over.
 
 <h2>About Me</h2>
-After spending about 6 years in software while moonlighting as a system administrator, I recently fell into information security and, well, my path was set. I currently work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth penetration testing of customer systems. I am also working towards my Master's in cybersecurity.
-
+After spending about 6 years in software while moonlighting as a system administrator, I discovered information security and, well, I was hooked. I now work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth penetration testing of customer systems. I am currently working towards my Master's in cybersecurity.
 
 
 
