@@ -52,7 +52,7 @@ quote-author: Google Chromium Projects
    </div>
 </div>
 <h2>Mission Statement</h2>
-I am here to learn. This site is a way for me to not only document my learning pursuits but share the results, hopefully helping others with similar interests and career goals. The best part of information security is that there is always more to learn so my search for knowledge will never be over.
+I am here to learn. This site is a way for me to not only document my learning pursuits but share the results, hopefully helping others with similar interests and career goals. The best thing about being part of the InfoSec community is that there is always more to learn so my search for knowledge will never be over.
 
 <h2>About Me</h2>
 After spending about 6 years as a software engineer and system administrator, I discovered information security and, well, I was hooked. I now work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth penetration testing of customer systems. I am currently working towards my Master's in cybersecurity.
