@@ -57,5 +57,6 @@ My personal mission is to learn, never stop learning, and share what I've learne
 <h2>About Me</h2>
 After spending about 6 years in software while moonlighting as a system administrator, I discovered information security and, well, I was hooked. I now work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth penetration testing of customer systems. I am currently working towards my Master's in cybersecurity.
 
+In my free time, I enjoying reading, eating and sleeping. There was a time when I had hobbies. I hope to see those times again some day.
 
 
