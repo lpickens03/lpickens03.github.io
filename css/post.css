@@ -16,7 +16,7 @@ h2 {
   font-size: 2rem;
 }
 h3 {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   font-size: 1.25rem;
 }
 h4, h5, h6 {
@@ -39,7 +39,7 @@ strong {
 /* Lists */
 ul, ol, dl {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 dt {
@@ -153,7 +153,7 @@ img {
 
 /* Tables */
 table {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   width: 100%;
   border: 1px solid #e5e5e5;
   border-collapse: collapse;
@@ -166,6 +166,10 @@ th {
 tbody tr:nth-child(odd) td,
 tbody tr:nth-child(odd) th {
   background-color: #f9f9f9;
+}
+
+.archive {
+  margin-bottom: 0.5rem;
 }
 
 

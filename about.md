@@ -52,11 +52,11 @@ quote-author: Google Chromium Projects
    </div>
 </div>
 <h2>Mission Statement</h2>
-I am here to learn. This site is a way for me to not only document my learning pursuits but share the results, hopefully helping others with similar interests and career goals. The best thing about being part of the InfoSec community is that there is always more to learn so my search for knowledge will never be over.
+This site is a way for me to document my research, projects and experiences for my own personal reference. While my primary focus will be on information security related topics, I may stray off course whenever the mood hits. 
 
 <h2>About Me</h2>
-After spending about 6 years as a software engineer and system administrator, I discovered information security and, well, I was hooked. I now work for a government contractor, assessing customer infrastructure for security vulnerabilities as well as supporting in-depth penetration testing of customer systems. I am currently working towards my Master's in cybersecurity.
+As a relatively recent convert to information security, I am a firm believer in building your knowledgebase in the fundamentals of computer science and networking in order to succeed in this field. InfoSec draws pretty heavily from all forms of IT and without a solid grasp of the "basics" you will hit wall after wall as you build your career. This is what attracted me to this field to begin with: I had a thirst to understand how <i>everything</i> works and positions I've held in software felt limited in scope compared to all that was out there.
 
-In my free time, I enjoying reading, eating and sleeping. There was a time when I had hobbies. I hope to see those times again some day.
+Before InfoSec, I spent 6 years as first a system administrator and then a software engineer. I am currently a cybersecurity analyst for a government contractor where I assess customer infrastructure for security vulnerabilities as well as support in-depth penetration testing of customer systems. I also am working towards my Master's in cybersecurity.
 
 
