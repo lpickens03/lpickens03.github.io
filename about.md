@@ -55,8 +55,8 @@ quote-author: Google Chromium Projects
 This site is a way for me to document my research, projects and experiences for my own personal reference. While my primary focus will be on information security related topics, I may stray off course whenever the mood hits. 
 
 <h2>About Me</h2>
-As a relatively recent convert to information security, I am a firm believer in building your knowledgebase in the fundamentals of computer science and networking in order to succeed in this field. InfoSec draws pretty heavily from all forms of IT and without a solid grasp of the "basics" you will hit wall after wall as you build your career. This is what attracted me to this field to begin with: I had a thirst to understand how <i>everything</i> works and positions I've held in software felt limited in scope compared to all that was out there.
+As a relatively recent convert to InfoSec, I am a firm believer in building your knowledgebase in the fundamentals of computer science, networking and, yes, program management in order to succeed in this field. Without a holistic approach to security, you will hit wall after wall as you build your career. This is what attracted me to this field to begin with: I had a thirst to understand how <i>everything</i> works. 
 
-Before InfoSec, I spent 6 years as first a system administrator and then a software engineer. I am currently a cybersecurity analyst for a government contractor where I assess customer infrastructure for security vulnerabilities as well as support in-depth penetration testing of customer systems. I also am working towards my Master's in cybersecurity.
+Before InfoSec, I spent a few years as a system administrator and then another few as a software engineer. I am currently a cybersecurity analyst for a government contractor. I assess customer infrastructure for security vulnerabilities as well as support in-depth penetration testing of customer systems. 
 
 
