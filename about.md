@@ -55,8 +55,8 @@ quote-author: Google Chromium Projects
 This site is a way for me to document my research, projects and experiences for my own personal reference. While my primary focus will be on information security related topics, I may stray off course whenever the mood hits. 
 
 <h2>About Me</h2>
-As a relatively recent convert to InfoSec, I am a firm believer in building your knowledgebase in the fundamentals of computer science, networking and, yes, program management in order to succeed in this field. Without a holistic approach to security, you will hit wall after wall as you build your career. This is what attracted me to this field to begin with: I had a thirst to understand how <i>everything</i> works. 
+As a relatively recent convert to InfoSec, I am a firm believer in building your knowledgebase in the fundamentals of computer science, networking and business management in order to succeed in this field. Without a holistic approach to security, you may overlook critical gaps in both your defensive and offensive strategies. This is one of the things I love most about InfoSec. It requires you to stay both humble in how much you know and always eager to learn more.
 
-Before InfoSec, I spent a few years as a system administrator and then another few as a software engineer. I am currently a cybersecurity analyst for a government contractor. I assess customer infrastructure for security vulnerabilities as well as support in-depth penetration testing of customer systems. 
+Before InfoSec, I spent a few years as a system administrator and then another few as a software engineer. I am currently a cybersecurity analyst for a government contractor. I assess customer infrastructure for security vulnerabilities as well as support in-depth penetration testing of customer systems.
 
 
