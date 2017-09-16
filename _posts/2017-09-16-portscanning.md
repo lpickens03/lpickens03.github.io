@@ -6,7 +6,9 @@ tags: [lab, scanning, ports, nmap, netcat, netstat]
 title: Port Scanning
 ---
 
-When either defending or attacking a system, it is important to learn as much as you can about it. One way to do this is with port scanning. There are up to 65,535 ports which could be in use by a system. Understanding what these ports are and how they are used is critical from both a defensive and offensive perspective.
+When either defending or attacking a system, it is important to learn as much as you can about it. One way to do this is with port scanning. There are up to 65,535 ports which could be in use on a system. Understanding what these ports are and how they are used is critical from both a defensive and offensive perspective.
+
+This post covers some common/useful commands for port scanning.
 
 <h2>NETSTAT</h2>
 From a host, you can list out all network connections on a system. 
