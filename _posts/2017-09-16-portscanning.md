@@ -10,6 +10,14 @@ When either defending or attacking a system, it is important to learn as much as
 
 This post covers some common/useful commands for port scanning.
 
+<h2>LSOF</h2>
+lsof provides a list of all open files belonging to all active processes.
+
+<code>lsof -i :&lt;port&gt;</code>
+<br/>Lists all processes listening on a specific port. Includes process id, making it pretty easy to kill if you need to.
+
+<img src="/images/posts/2017-09-16/lsof_i.png" alt="lsof command"/>
+
 <h2>NETSTAT</h2>
 From a host, you can list out all network connections on a system. 
 
