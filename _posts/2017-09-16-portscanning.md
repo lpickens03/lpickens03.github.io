@@ -1,7 +1,7 @@
 ---
-layout: note
-type: Note
-category: Notes
+layout: post
+type: Project
+category: Projects
 tags: [lab, scanning, ports, nmap, netcat, netstat]
 title: Port Scanning
 ---
