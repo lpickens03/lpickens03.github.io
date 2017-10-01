@@ -2,7 +2,7 @@
 layout: post
 type: Project
 category: Projects
-tags: [lab, python, socket]
+tags: [lab, python, socket, tcp/ip]
 title: Packet Sniffing with Python
 ---
 
