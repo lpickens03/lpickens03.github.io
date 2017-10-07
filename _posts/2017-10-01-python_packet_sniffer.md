@@ -82,7 +82,7 @@ For a detailed look at the TCP header and its fields checkout <a href="http://ww
 I am primarily interested in the ports in this header. I could dig even deeper into the packet to pull out more information. However, there are a lot of different protocols/applications that can be run on TCP. Handling all these variations can get pretty complicated. Frankly, there are already packet sniffers out there that handle processing these layers fairly well. So for this script I really only care about IP and TCP.
 
 <h2>The Script</h2>
-I was lucky to find a great tutorial for processing IP packets <a href="//www.binarytides.com/python-packet-sniffer-code-linux/">here</a>. I will walk though some of Silver Moon's examples since they helped me wrap my head around what I was doing. I encourage you to check out Silver Moon's tutorial as it covers additional socket configurations as well as Ethernet, IDP and ICMP headers which I haven't included in this post. My final script uses Silver Moon's processing algorithm (to convert hex into the header values). 
+I was lucky to find a great tutorial for processing IP packets <a href="//www.binarytides.com/python-packet-sniffer-code-linux/">here</a>. I will walk though some of Silver Moon's examples since they helped me wrap my head around what I was doing. I encourage you to check out Silver Moon's tutorial as it covers additional socket configurations as well as Ethernet frames, UDP and ICMP headers which I haven't included in this post. My final script uses Silver Moon's processing algorithm (to convert hex into the header values). 
 
 <h3 style="font-size: 120%">Capturing Raw Network Data</h3>
 Below is a basic script for just capturing raw data being received your host.
@@ -133,68 +133,68 @@ The code for the packet sniffer script:
 	while True:
 	    packet = s.recvfrom(80)
 
-    #packet string from tuple
-    packet = packet[0]
+	    #packet string from tuple
+	    packet = packet[0]
 
-    #take first 20 characters for the IP header
-    ip_header = packet[0:20]
+	    #take first 20 characters for the IP header
+	    ip_header = packet[0:20]
 
-    #now unpack them
-    iph = unpack('!BBHHHBBH4s4s', ip_header)
+	    #now unpack them
+	    iph = unpack('!BBHHHBBH4s4s', ip_header)
 
-    version_ihl = iph[0]
-    version = version_ihl >> 4
-    ihl = version_ihl & 0xF
+	    version_ihl = iph[0]
+	    version = version_ihl >> 4
+	    ihl = version_ihl & 0xF
 
-    iph_length = ihl * 4
+	    iph_length = ihl * 4
 
-    ttl = iph[5]
-    protocol = iph[6]
-    s_addr = socket.inet_ntoa(iph[8])
-    d_addr = socket.inet_ntoa(iph[9])
+	    ttl = iph[5]
+	    protocol = iph[6]
+	    s_addr = socket.inet_ntoa(iph[8])
+	    d_addr = socket.inet_ntoa(iph[9])
 
-    print '-----------------------PACKET-----------------------'
-    print "IP Header Info              | TCP Header Info"
-    ip_info = ['Version: ' + str(version),
-               'IP Header Length: ' + str(ihl), 
-               'TTL: ' + str(ttl),
-               'Protocol: ' + str(protocol), 
-               'Source Address: ' + str(s_addr), 
-               'Dest Address: ' + str(d_addr)]
+	    print '-----------------------PACKET-----------------------'
+	    print "IP Header Info              | TCP Header Info"
+	    ip_info = ['Version: ' + str(version),
+	               'IP Header Length: ' + str(ihl), 
+	               'TTL: ' + str(ttl),
+	               'Protocol: ' + str(protocol), 
+	               'Source Address: ' + str(s_addr), 
+	               'Dest Address: ' + str(d_addr)]
 
-    tcp_header = packet[iph_length:iph_length+20]
+	    tcp_header = packet[iph_length:iph_length+20]
 
-    #now unpack them
-    tcph = unpack('!HHLLBBHHH', tcp_header)
+	    #now unpack them
+	    tcph = unpack('!HHLLBBHHH', tcp_header)
 
-    source_port = tcph[0]
-    dest_port = tcph[1]
-    sequence = tcph[2]
-    acknowledgement = tcph[3]
-    doff_reserved = tcph[4]
-    tcph_length = doff_reserved >> 4
+	    source_port = tcph[0]
+	    dest_port = tcph[1]
+	    sequence = tcph[2]
+	    acknowledgement = tcph[3]
+	    doff_reserved = tcph[4]
+	    tcph_length = doff_reserved >> 4
 
-    tcp_info = ['Source Port: ' + str(source_port),
-                'Destination Port: ' + str(dest_port),
-                'Sequence: ' + str(sequence), 
-                'Acknowledgement: ' + str(acknowledgement), 
-                'TCP Header Length: ' + str(tcph_length)]
+	    tcp_info = ['Source Port: ' + str(source_port),
+	                'Destination Port: ' + str(dest_port),
+	                'Sequence: ' + str(sequence), 
+	                'Acknowledgement: ' + str(acknowledgement), 
+	                'TCP Header Length: ' + str(tcph_length)]
 
-    h_size = iph_length + tcph_length * 4
-    data_size = len(packet) - h_size
+	    h_size = iph_length + tcph_length * 4
+	    data_size = len(packet) - h_size
 
-    #get data from the packet
-    data = packet[h_size:]
+	    #get data from the packet
+	    data = packet[h_size:]
 
-    #print ip and tcp header info
-    for i in range(0,len(ip_info)):
-        tcp_data = ""
-        if i < len(tcp_info):
-            tcp_data = tcp_info[i]
-        print ip_info[i] + " "*(28-len(ip_info[i])) + "| " + tcp_data
+	    #print ip and tcp header info
+	    for i in range(0,len(ip_info)):
+	        tcp_data = ""
+	        if i < len(tcp_info):
+	            tcp_data = tcp_info[i]
+	        print ip_info[i] + " "*(28-len(ip_info[i])) + "| " + tcp_data
 
-    print 'Data: ' + data
-    print '-----------------------PACKET-----------------------'
+	    print 'Data: ' + data
+	    print '-----------------------PACKET-----------------------'
 
 You can also find it on <a href="https://github.com/pickl09/scripts/blob/master/packet_sniffer/packet_sniffer.py">github</a>.
 
