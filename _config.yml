@@ -15,7 +15,7 @@ baseurl:          /
 
 author:
   name:           'Laura Pickens'
-  url:            //twitter.com/pickl09
+  url:            //twitter.com/cybermatcha
 
 paginate:         5
 
@@ -33,6 +33,6 @@ github:
   repo:           //github.com/pickl09
 
 # Social networking links used in footer. Update and remove as you like.
-  twitter:        //twitter.com/pickl09
+  twitter:        //twitter.com/cybermatcha
   facebook:       
   linkedin:       
