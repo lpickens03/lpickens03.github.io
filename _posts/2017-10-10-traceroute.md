@@ -66,6 +66,6 @@ You can see that traceroute was able to complete the path. My lab's network isn'
 From a defensive perspective, I wouldn't bend over backwards trying to block these kinds of scans from getting into your network. It's important to remember that traceroute is a tool your own team uses to debug network issues. Honestly, if your network's primary defenses rely on the fact that the adversary doesn't have a complete list of the IP addresses in your network, you are doing security wrong.
 
 <h2>References</h2>
-<i>Practical Packet Analysis</i>, 3rd Edition, Chris Sanders, 2017
+<a href="/book%20reviews/2018/01/03/practicalpacketanalysis/">Chris Sanders, <i>Practical Packet Analysis</i>, 3rd Edition, No Starch Press, 2017</a>
 
 
