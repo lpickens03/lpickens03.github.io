@@ -1,1 +1,1 @@
-# www.lkaplan.net
+# lkaplan.net
