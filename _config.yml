@@ -6,15 +6,15 @@ gems: [jekyll-paginate]
 permalink:        pretty
 
 # Setup
-title:            Laura Pickens
+title:            Laura Kaplan
 tagline:          'Cybersecurity Analyst'
 description:      'Personal blog documenting research/projects done by Laura.'
-url:              https://www.laurapickens.net
-enforce_ssl:      www.laurapickens.net
+url:              https://lkaplan.net
+enforce_ssl:      lkaplan.net
 baseurl:          /
 
 author:
-  name:           'Laura Pickens'
+  name:           'Laura Kaplan'
   url:            //twitter.com/cybermatcha
 
 paginate:         5
