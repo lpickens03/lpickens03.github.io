@@ -55,7 +55,7 @@ quote-author: Google Chromium Projects
 This site is a way for me to document my own personal research, projects and experiences for future reference. 
 
 <h2>About Me</h2>
-Having been in the tech industry for ~10 years, I have had the pleasure of working as a systems administrator, software engineer, security analyst and now cybersecurity engineer. I currently develop software applications to automate security vulnerability and compliance scanning and reporting for a multinational financial institution.
+Having been in the tech industry for ~10 years, I have had the pleasure of working as a web developer, systems administrator, software engineer, security analyst and now cybersecurity engineer. I currently develop software applications to automate security vulnerability and compliance scanning and reporting for a multinational financial institution.
 
 The best thing about this industry is that I never get bored. There is always something new to learn and a variety of ways to learn it!
 
