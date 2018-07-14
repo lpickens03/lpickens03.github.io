@@ -12,16 +12,16 @@ quote-author: Google Chromium Projects
     <div class="row">
     	<!--<div class="footer-col col-md-4">-->
             <h3>Title</h3>
-            <p>Cybersecurity Analyst</p>
+            <p>Cybersecurity Engineer</p>
         <!--</div>
     	<div class="footer-col col-md-4">-->
             <h3>Education</h3>
-            <p>MS Cybersecurity (2018)<br/>
+            <p>MS Cybersecurity<br/>
             BA Computer Science</p>
             <h3>Certifications</h3>
             <ul class="list-inline">
                 <li>
-                    <img class="cert-icon" src="/images/SecurityPlusLogoCertifiedCEWhite.png"/>
+                    <a href="//www.youracclaim.com/badges/d1270049-da55-49fd-9af6-8c84415fd3f6/public_url"><img class="cert-icon" src="/images/certified-information-systems-security-professional-cissp.png"/></a>
                 </li>
             </ul>
         <!--</div>
@@ -52,11 +52,11 @@ quote-author: Google Chromium Projects
    </div>
 </div>
 <h2>Mission Statement</h2>
-This site is a way for me to document my research, projects and experiences for my own personal reference. While my primary focus will be on information security related topics, I may stray off course whenever the mood hits. 
+This site is a way for me to document my own personal research, projects and experiences for future reference. 
 
 <h2>About Me</h2>
-As a relatively recent convert to InfoSec, I am a firm believer in building your knowledgebase in the fundamentals of computer science, networking and business management in order to succeed in this field. Without a holistic approach to security, you may overlook critical gaps in both your defensive and offensive strategies. This is one of the things I love most about InfoSec. It requires you to stay both humble in how much you know and always eager to learn more.
+Having been in the tech industry for ~10 years, I have had the plesure of working as a systems administrator, software engineer, security analyst and now cybersecurity engineer. I currently develop software applications to automate security vulnerability and compliance scanning and reporting for a multinational financial institution.
 
-Before InfoSec, I spent a few years as a system administrator and then another few as a software engineer. I am currently a cybersecurity analyst for a government contractor. I assess customer infrastructure for security vulnerabilities as well as support in-depth penetration testing of customer systems.
+The best thing about this industry is that I never get bored. There is always something new to learn and a variety of ways to learn it!
 
 
