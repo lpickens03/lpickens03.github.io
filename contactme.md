@@ -38,5 +38,5 @@ quote-author: Bruce Schneier
 
 <script>
     var contactform =  document.getElementById('contactform');
-    contactform.setAttribute('action', '//formspree.io/' + 'contact' + '@' + 'laurakaplan' + '.' + 'net');
+    contactform.setAttribute('action', '//formspree.io/' + 'contact' + '@' + 'lkaplan' + '.' + 'net');
 </script>
